@@ -1,0 +1,17 @@
+E:\Gabriel\repos\BombSharp\BombSharp\BombSharp\bin\Debug\net6.0-windows\BombSharp.exe
+E:\Gabriel\repos\BombSharp\BombSharp\BombSharp\bin\Debug\net6.0-windows\BombSharp.deps.json
+E:\Gabriel\repos\BombSharp\BombSharp\BombSharp\bin\Debug\net6.0-windows\BombSharp.runtimeconfig.json
+E:\Gabriel\repos\BombSharp\BombSharp\BombSharp\bin\Debug\net6.0-windows\BombSharp.dll
+E:\Gabriel\repos\BombSharp\BombSharp\BombSharp\bin\Debug\net6.0-windows\ref\BombSharp.dll
+E:\Gabriel\repos\BombSharp\BombSharp\BombSharp\bin\Debug\net6.0-windows\BombSharp.pdb
+E:\Gabriel\repos\BombSharp\BombSharp\BombSharp\obj\Debug\net6.0-windows\BombSharp.csproj.AssemblyReference.cache
+E:\Gabriel\repos\BombSharp\BombSharp\BombSharp\obj\Debug\net6.0-windows\BombSharp.Menu.resources
+E:\Gabriel\repos\BombSharp\BombSharp\BombSharp\obj\Debug\net6.0-windows\BombSharp.csproj.GenerateResource.cache
+E:\Gabriel\repos\BombSharp\BombSharp\BombSharp\obj\Debug\net6.0-windows\BombSharp.GeneratedMSBuildEditorConfig.editorconfig
+E:\Gabriel\repos\BombSharp\BombSharp\BombSharp\obj\Debug\net6.0-windows\BombSharp.AssemblyInfoInputs.cache
+E:\Gabriel\repos\BombSharp\BombSharp\BombSharp\obj\Debug\net6.0-windows\BombSharp.AssemblyInfo.cs
+E:\Gabriel\repos\BombSharp\BombSharp\BombSharp\obj\Debug\net6.0-windows\BombSharp.csproj.CoreCompileInputs.cache
+E:\Gabriel\repos\BombSharp\BombSharp\BombSharp\obj\Debug\net6.0-windows\BombSharp.dll
+E:\Gabriel\repos\BombSharp\BombSharp\BombSharp\obj\Debug\net6.0-windows\ref\BombSharp.dll
+E:\Gabriel\repos\BombSharp\BombSharp\BombSharp\obj\Debug\net6.0-windows\BombSharp.pdb
+E:\Gabriel\repos\BombSharp\BombSharp\BombSharp\obj\Debug\net6.0-windows\BombSharp.genruntimeconfig.cache
