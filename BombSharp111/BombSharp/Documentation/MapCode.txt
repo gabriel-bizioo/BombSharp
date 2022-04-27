@@ -1,0 +1,3 @@
+﻿Blocks that can't be destroyed = C
+Blocks that can be destroyed = D
+Blank space = B

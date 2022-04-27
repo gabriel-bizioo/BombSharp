@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "E:\\Gabriel\\repos\\BombSharp\\BombSharp\\BombSharp\\BombSharp.csproj": {}
+    "E:\\Moll\\BombSharp\\BombSharp\\BombSharp\\BombSharp.csproj": {}
   },
   "projects": {
-    "E:\\Gabriel\\repos\\BombSharp\\BombSharp\\BombSharp\\BombSharp.csproj": {
+    "E:\\Moll\\BombSharp\\BombSharp\\BombSharp\\BombSharp.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "E:\\Gabriel\\repos\\BombSharp\\BombSharp\\BombSharp\\BombSharp.csproj",
+        "projectUniqueName": "E:\\Moll\\BombSharp\\BombSharp\\BombSharp\\BombSharp.csproj",
         "projectName": "BombSharp",
-        "projectPath": "E:\\Gabriel\\repos\\BombSharp\\BombSharp\\BombSharp\\BombSharp.csproj",
+        "projectPath": "E:\\Moll\\BombSharp\\BombSharp\\BombSharp\\BombSharp.csproj",
         "packagesPath": "C:\\Users\\Aluno\\.nuget\\packages\\",
-        "outputPath": "E:\\Gabriel\\repos\\BombSharp\\BombSharp\\BombSharp\\obj\\",
+        "outputPath": "E:\\Moll\\BombSharp\\BombSharp\\BombSharp\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
