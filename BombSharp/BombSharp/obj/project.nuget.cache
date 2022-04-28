@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "J8wOJrMm2vYwGB8A/bvyq2V1siCCFgnY92JlMhrz4C0CyEq613NX/X7G7CFw35tPVqEIt7W12yQ7lKUz+ZQBrw==",
+  "dgSpecHash": "ozdo0UaB2sfwqIsDepMSF/jfW/T58QaV5UbPJYizGxZAgz+aJBPC9uiaiR4JEgN6ZZpYpy+MQwUAh6rsqHsNqg==",
   "success": true,
-  "projectFilePath": "E:\\Gabriel\\repos\\BombSharp\\BombSharp\\BombSharp\\BombSharp.csproj",
+  "projectFilePath": "C:\\repos\\BombSharp\\BombSharp\\BombSharp\\BombSharp.csproj",
   "expectedPackageFiles": [],
   "logs": []
 }
