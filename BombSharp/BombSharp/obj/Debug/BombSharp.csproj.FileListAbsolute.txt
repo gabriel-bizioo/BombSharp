@@ -4,8 +4,10 @@ E:\Moll\BombSharp\BombSharp\BombSharp\bin\Debug\BombSharp.pdb
 E:\Moll\BombSharp\BombSharp\BombSharp\obj\Debug\BombSharp.csproj.AssemblyReference.cache
 E:\Moll\BombSharp\BombSharp\BombSharp\obj\Debug\BombSharp.csproj.SuggestedBindingRedirects.cache
 E:\Moll\BombSharp\BombSharp\BombSharp\obj\Debug\BombSharp.Form1.resources
-E:\Moll\BombSharp\BombSharp\BombSharp\obj\Debug\BombSharp.Properties.Resources.resources
 E:\Moll\BombSharp\BombSharp\BombSharp\obj\Debug\BombSharp.csproj.GenerateResource.cache
 E:\Moll\BombSharp\BombSharp\BombSharp\obj\Debug\BombSharp.csproj.CoreCompileInputs.cache
 E:\Moll\BombSharp\BombSharp\BombSharp\obj\Debug\BombSharp.exe
 E:\Moll\BombSharp\BombSharp\BombSharp\obj\Debug\BombSharp.pdb
+E:\Moll\BombSharp\BombSharp\BombSharp\obj\Debug\BombSharp.Properties.audios.resources
+E:\Moll\BombSharp\BombSharp\BombSharp\obj\Debug\BombSharp.Properties.maps.resources
+E:\Moll\BombSharp\BombSharp\BombSharp\obj\Debug\BombSharp.Properties.sprites.resources

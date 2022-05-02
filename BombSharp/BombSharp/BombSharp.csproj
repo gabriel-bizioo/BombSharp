@@ -47,6 +47,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Classes\Block.cs" />
+    <Compile Include="Classes\Player.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -58,14 +59,34 @@
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Properties\Resources.resx">
+    <EmbeddedResource Include="Properties\audios.resx">
       <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <LastGenOutput>audios.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <Compile Include="Properties\Resources.Designer.cs">
+    <EmbeddedResource Include="Properties\maps.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>maps.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\sprites.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>sprites.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\audios.Designer.cs">
+      <DependentUpon>audios.resx</DependentUpon>
       <AutoGen>True</AutoGen>
-      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Properties\maps.Designer.cs">
+      <DependentUpon>maps.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Properties\sprites.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>sprites.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
     <None Include="Properties\Settings.settings">
@@ -82,9 +103,14 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\Sprites\SNES - Super Bomberman 5 JPN - Bomberman.png" />
+    <None Include="Assets\Sprites\snes - super bomberman 5 jpn - bomberman1.png" />
     <Content Include="Documentation\MapCode.txt" />
     <Content Include="Maps\LVL2 .txt" />
     <Content Include="Maps\LVL1.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Assets\Audio\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

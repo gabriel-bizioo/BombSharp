@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BombSharp.Classes;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -12,11 +13,27 @@ namespace BombSharp
 {
     public partial class Form1 : Form
     {
-        private Classes.Block[,] objLvl = new Classes.Block[11, 11];
+        private Block[,] objLvl = new Classes.Block[11, 11];
         public Form1()
         {
             InitializeComponent();
-            LoadGame(2);
+            LoadGame(1);
+        }
+
+        public Block SearchElementInArrays(Control element)
+        {
+            Block result = null;
+            for(int i = 0; i < objLvl.GetLength(0); i++)
+            {
+                for(int j = 0; j < objLvl.GetLength(i); j++)
+                {
+                    if (element == objLvl[i, j].BlockObj)
+                    {
+                        result = objLvl[i, j];
+                    }
+                }
+            }
+            return result;
         }
 
         public void LoadGame(int lvl)
@@ -30,10 +47,10 @@ namespace BombSharp
                     this.Close();
                     break;
                 case 1:
-                    map = Properties.Resources.LVL1;
+                    map = Properties.maps.LVL1;
                     break;
                 case 2:
-                    map = Properties.Resources.LVL2;
+                    map = Properties.maps.LVL2;
                     break;
             }
 
@@ -55,24 +72,24 @@ namespace BombSharp
                     {
                         Button btn = new Button();
                         btn.Size = new Size(blockWidth, blockHeight);
-                        Nullable<Classes.BlockType> blocktype = null;
+                        Nullable<BlockType> blocktype = null;
 
                         switch (strBlockChar)
                         {
                             //Destructible
                             case "D":
                                 btn.BackColor = Color.LightGray;
-                                blocktype = Classes.BlockType.Destructible;
+                                blocktype = BlockType.Destructible;
                                 break;
                             //Black Space
                             case "B":
                                 btn.BackColor = Color.Green;
-                                blocktype = Classes.BlockType.Empty;
+                                blocktype = BlockType.Empty;
                                 break;
                             //Indestructible
                             case "C":
                                 btn.BackColor = Color.DarkGray;
-                                blocktype = Classes.BlockType.NonDestructible;
+                                blocktype = BlockType.NonDestructible;
                                 break;
                             default:
                                 MessageBox.Show($"{strBlockChar} is not a valid character");
@@ -81,7 +98,7 @@ namespace BombSharp
 
                         btn.Location = new Point(currentPosX, currentPosY);
                         this.Controls.Add(btn);
-                        this.objLvl[iRow, iCol] = new Classes.Block(btn, blocktype.Value);
+                        this.objLvl[iRow, iCol] = new Block(btn, blocktype.Value);
 
                         iCol++;
                         currentPosX += (blockWidth + 1);
@@ -93,6 +110,7 @@ namespace BombSharp
                 }
                 strReader.Close();
             }
+
         }
     }
 }
