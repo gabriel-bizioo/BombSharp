@@ -14,13 +14,19 @@ namespace BombSharp
     public partial class Form1 : Form
     {
         private Block[,] objLvl = new Classes.Block[11, 11];
+        Bitmap bmp = null;
+        Graphics g = null;
+        RectangleF rec = new RectangleF();
         public Form1()
         {
             InitializeComponent();
-            LoadGame(1);
+            Load += delegate
+            {
+                LoadGame(1);
+            };
         }
 
-        public Block SearchElementInArrays(Control element)
+        public Block SearchElementInArrays(Graphics element)
         {
             Block result = null;
             for(int i = 0; i < objLvl.GetLength(0); i++)
@@ -35,9 +41,11 @@ namespace BombSharp
             }
             return result;
         }
-
         public void LoadGame(int lvl)
         {
+            bmp = new Bitmap(pictureBox1.Width, pictureBox1.Height);
+            g = Graphics.FromImage(bmp);
+            g.Clear(Color.White);
             string map = string.Empty;
 
             switch (lvl)
@@ -53,14 +61,13 @@ namespace BombSharp
                     map = Properties.maps.LVL2;
                     break;
             }
-
-            using(System.IO.StringReader strReader = new System.IO.StringReader(map))
+            using (System.IO.StringReader strReader = new System.IO.StringReader(map))
             {
-                int blockHeight = 50;
-                int blockWidth = 50;
-                int currentPosY = 0;
-                int currentPosX = 0;
-                int initialPosX = 0;
+                float blockHeight = 16;
+                float blockWidth = 16;
+                float currentPosY = 0;
+                float currentPosX = 0;
+                float initialPosX = 0;
                 int iRow = 0;
                 int iCol = 0;
 
@@ -70,44 +77,42 @@ namespace BombSharp
                     string[] strLineArray = strLine.Split(' ');
                     foreach(string strBlockChar in strLineArray)
                     {
-                        Button btn = new Button();
-                        btn.Size = new Size(blockWidth, blockHeight);
                         Nullable<BlockType> blocktype = null;
-
+                        
+                        rec.Size = new SizeF(blockWidth, blockHeight);
+                        rec.Location = new PointF(currentPosX, currentPosY);
+                        
                         switch (strBlockChar)
                         {
                             //Destructible
                             case "D":
-                                btn.BackColor = Color.LightGray;
+                                g.DrawImage(Properties.blocks.Destructible, rec);
                                 blocktype = BlockType.Destructible;
                                 break;
                             //Black Space
                             case "B":
-                                btn.BackColor = Color.Green;
+                                g.DrawImage(Properties.blocks.Empty, rec);
                                 blocktype = BlockType.Empty;
                                 break;
                             //Indestructible
                             case "C":
-                                btn.BackColor = Color.DarkGray;
+                                g.DrawImage(Properties.blocks.NonDestructible, rec);
                                 blocktype = BlockType.NonDestructible;
                                 break;
                             default:
-                                MessageBox.Show($"{strBlockChar} is not a valid character");
-                                break;
+                                throw new Exception("Invalid character.");
                         }
 
-                        btn.Location = new Point(currentPosX, currentPosY);
-                        this.Controls.Add(btn);
-                        this.objLvl[iRow, iCol] = new Block(btn, blocktype.Value);
-
+                        this.objLvl[iRow, iCol] = new Block(g, blocktype.Value);
                         iCol++;
-                        currentPosX += (blockWidth + 1);
+                        currentPosX += blockWidth;
                     }
                     iRow++;
                     iCol = 0;
                     currentPosX = initialPosX;
                     currentPosY += blockHeight;
                 }
+                pictureBox1.Image = bmp;
                 strReader.Close();
             }
 

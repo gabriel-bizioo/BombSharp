@@ -64,6 +64,11 @@
       <LastGenOutput>audios.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="Properties\blocks.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>blocks.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\maps.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>maps.Designer.cs</LastGenOutput>
@@ -76,6 +81,11 @@
     </EmbeddedResource>
     <Compile Include="Properties\audios.Designer.cs">
       <DependentUpon>audios.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Properties\blocks.Designer.cs">
+      <DependentUpon>blocks.resx</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
@@ -103,7 +113,13 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\Sprites\Blocks\Destructible.png" />
+    <Content Include="Assets\Sprites\Blocks\Empty.png" />
+    <Content Include="Assets\Sprites\Blocks\NonDestructible.png" />
+    <Content Include="Assets\Sprites\items.png" />
+    <Content Include="Assets\Sprites\player.png" />
     <Content Include="Assets\Sprites\SNES - Super Bomberman 5 JPN - Bomberman.png" />
+    <Content Include="Assets\Sprites\SNES - Super Bomberman 5 JPN - Items.png" />
     <Content Include="Documentation\MapCode.txt" />
     <Content Include="Maps\LVL2 .txt" />
     <Content Include="Maps\LVL1.txt" />
