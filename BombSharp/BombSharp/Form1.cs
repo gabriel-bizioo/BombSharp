@@ -13,10 +13,14 @@ namespace BombSharp
 {
     public partial class Form1 : Form
     {
-        private Block[,] objLvl = new Classes.Block[11, 11];
+        private Block[,] blocksLvl = new Classes.Block[11, 11];
         Bitmap bmp = null;
         Graphics g = null;
-        RectangleF rec = new RectangleF();
+        Rectangle rec = new Rectangle();
+        Player player = null;
+        int blockHeight = 100;
+        int blockWidth = 100;
+
         public Form1()
         {
             InitializeComponent();
@@ -29,13 +33,13 @@ namespace BombSharp
         public Block SearchElementInArrays(Graphics element)
         {
             Block result = null;
-            for(int i = 0; i < objLvl.GetLength(0); i++)
+            for(int i = 0; i < blocksLvl.GetLength(0); i++)
             {
-                for(int j = 0; j < objLvl.GetLength(i); j++)
+                for(int j = 0; j < blocksLvl.GetLength(i); j++)
                 {
-                    if (element == objLvl[i, j].BlockObj)
+                    if (element == blocksLvl[i, j].BlockObj)
                     {
-                        result = objLvl[i, j];
+                        result = blocksLvl[i, j];
                     }
                 }
             }
@@ -63,13 +67,20 @@ namespace BombSharp
             }
             using (System.IO.StringReader strReader = new System.IO.StringReader(map))
             {
-                float blockHeight = 16;
-                float blockWidth = 16;
-                float currentPosY = 0;
-                float currentPosX = 0;
-                float initialPosX = 0;
+                //Generate Map with the txt
+                
+                int currentPosY = 0;
+                int currentPosX = 0;
+                int initialPosX = 0;
                 int iRow = 0;
                 int iCol = 0;
+
+                rec.Size = new Size(blockWidth, blockHeight);
+
+                //Blocks used
+                var blockDestructible = Properties.blocks.Destructible;
+                var blockEmpty = Properties.blocks.Empty;
+                var blockNonDestructible = Properties.blocks.NonDestructible;
 
                 string strLine = string.Empty;
                 while ((strLine = strReader.ReadLine()) != null)
@@ -79,31 +90,30 @@ namespace BombSharp
                     {
                         Nullable<BlockType> blocktype = null;
                         
-                        rec.Size = new SizeF(blockWidth, blockHeight);
-                        rec.Location = new PointF(currentPosX, currentPosY);
-                        
+                        rec.Location = new Point(currentPosX, currentPosY);
+
                         switch (strBlockChar)
                         {
                             //Destructible
                             case "D":
-                                g.DrawImage(Properties.blocks.Destructible, rec);
+                                g.DrawImage(blockDestructible, rec);
                                 blocktype = BlockType.Destructible;
                                 break;
                             //Black Space
                             case "B":
-                                g.DrawImage(Properties.blocks.Empty, rec);
+                                g.DrawImage(blockEmpty, rec);
                                 blocktype = BlockType.Empty;
                                 break;
                             //Indestructible
                             case "C":
-                                g.DrawImage(Properties.blocks.NonDestructible, rec);
+                                g.DrawImage(blockNonDestructible, rec);
                                 blocktype = BlockType.NonDestructible;
                                 break;
                             default:
                                 throw new Exception("Invalid character.");
                         }
 
-                        this.objLvl[iRow, iCol] = new Block(g, blocktype.Value);
+                        this.blocksLvl[iRow, iCol] = new Block(g, blocktype.Value);
                         iCol++;
                         currentPosX += blockWidth;
                     }
@@ -115,6 +125,14 @@ namespace BombSharp
                 pictureBox1.Image = bmp;
                 strReader.Close();
             }
+
+            //Player
+            Rectangle player = new Rectangle(0, 0, blockWidth, blockHeight);
+            g.DrawImage(Properties.sprites.player, player);
+        }
+
+        private void Form1_KeyDown(object sender, KeyEventArgs e)
+        {
 
         }
     }
