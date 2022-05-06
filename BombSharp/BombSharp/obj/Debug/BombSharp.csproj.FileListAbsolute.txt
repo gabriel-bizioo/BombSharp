@@ -39,3 +39,17 @@ C:\Users\disrct\Desktop\BombSharp-main\BombSharp\BombSharp\obj\Debug\BombSharp.c
 C:\Users\disrct\Desktop\BombSharp-main\BombSharp\BombSharp\obj\Debug\BombSharp.csproj.CoreCompileInputs.cache
 C:\Users\disrct\Desktop\BombSharp-main\BombSharp\BombSharp\obj\Debug\BombSharp.exe
 C:\Users\disrct\Desktop\BombSharp-main\BombSharp\BombSharp\obj\Debug\BombSharp.pdb
+E:\Moll\repos\BombSharp\BombSharp\BombSharp\bin\Debug\BombSharp.exe.config
+E:\Moll\repos\BombSharp\BombSharp\BombSharp\bin\Debug\BombSharp.exe
+E:\Moll\repos\BombSharp\BombSharp\BombSharp\bin\Debug\BombSharp.pdb
+E:\Moll\repos\BombSharp\BombSharp\BombSharp\obj\Debug\BombSharp.csproj.AssemblyReference.cache
+E:\Moll\repos\BombSharp\BombSharp\BombSharp\obj\Debug\BombSharp.csproj.SuggestedBindingRedirects.cache
+E:\Moll\repos\BombSharp\BombSharp\BombSharp\obj\Debug\BombSharp.Form1.resources
+E:\Moll\repos\BombSharp\BombSharp\BombSharp\obj\Debug\BombSharp.Properties.audios.resources
+E:\Moll\repos\BombSharp\BombSharp\BombSharp\obj\Debug\BombSharp.Properties.blocks.resources
+E:\Moll\repos\BombSharp\BombSharp\BombSharp\obj\Debug\BombSharp.Properties.maps.resources
+E:\Moll\repos\BombSharp\BombSharp\BombSharp\obj\Debug\BombSharp.Properties.sprites.resources
+E:\Moll\repos\BombSharp\BombSharp\BombSharp\obj\Debug\BombSharp.csproj.GenerateResource.cache
+E:\Moll\repos\BombSharp\BombSharp\BombSharp\obj\Debug\BombSharp.csproj.CoreCompileInputs.cache
+E:\Moll\repos\BombSharp\BombSharp\BombSharp\obj\Debug\BombSharp.exe
+E:\Moll\repos\BombSharp\BombSharp\BombSharp\obj\Debug\BombSharp.pdb

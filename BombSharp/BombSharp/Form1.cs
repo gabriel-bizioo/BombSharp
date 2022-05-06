@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Drawing.Imaging;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -74,6 +75,8 @@ namespace BombSharp
                 int initialPosX = 0;
                 int iRow = 0;
                 int iCol = 0;
+                ImageAttributes attributes = new ImageAttributes();
+                attributes.SetGamma(1f);
 
                 rec.Size = new Size(blockWidth, blockHeight);
 
@@ -96,17 +99,17 @@ namespace BombSharp
                         {
                             //Destructible
                             case "D":
-                                g.DrawImage(blockDestructible, rec);
+                                g.DrawImage(Properties.blocks.Destructible, new Rectangle((int)currentPosX, (int)currentPosY, (int)blockWidth, (int)blockHeight), 0, 0, 16, 16, GraphicsUnit.Pixel, attributes);
                                 blocktype = BlockType.Destructible;
                                 break;
                             //Black Space
                             case "B":
-                                g.DrawImage(blockEmpty, rec);
+                                g.DrawImage(Properties.blocks.Empty, new Rectangle((int)currentPosX, (int)currentPosY, (int)blockWidth, (int)blockHeight), 0, 0, 16, 16, GraphicsUnit.Pixel, attributes);
                                 blocktype = BlockType.Empty;
                                 break;
                             //Indestructible
                             case "C":
-                                g.DrawImage(blockNonDestructible, rec);
+                                g.DrawImage(Properties.blocks.NonDestructible, new Rectangle((int)currentPosX, (int)currentPosY, (int)blockWidth, (int)blockHeight), 0, 0, 16, 16, GraphicsUnit.Pixel, attributes);
                                 blocktype = BlockType.NonDestructible;
                                 break;
                             default:
