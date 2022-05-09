@@ -9,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Drawing.Drawing2D;
 
 namespace BombSharp
 {
@@ -69,14 +70,15 @@ namespace BombSharp
             using (System.IO.StringReader strReader = new System.IO.StringReader(map))
             {
                 //Generate Map with the txt
+                g.InterpolationMode = InterpolationMode.NearestNeighbor;
+                ImageAttributes attributes = new ImageAttributes();
+                attributes.SetWrapMode(WrapMode.TileFlipY);
                 
                 int currentPosY = 0;
                 int currentPosX = 0;
                 int initialPosX = 0;
                 int iRow = 0;
                 int iCol = 0;
-                ImageAttributes attributes = new ImageAttributes();
-                attributes.SetGamma(1f);
 
                 rec.Size = new Size(blockWidth, blockHeight);
 
