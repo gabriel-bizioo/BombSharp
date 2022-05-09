@@ -7,10 +7,8 @@ using System.Threading.Tasks;
 
 namespace BombSharp.Classes
 {
-    internal class Player
+    public class Player
     {
-        //public Image[,] Sprites { get => ; set => sprites = value; }
-
-
+        public int Speed;
     }
 }

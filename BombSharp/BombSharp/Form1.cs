@@ -20,8 +20,10 @@ namespace BombSharp
         Graphics g = null;
         Rectangle rec = new Rectangle();
         Player player = null;
+        Timer tm = new Timer();
         int blockHeight = 100;
         int blockWidth = 100;
+
 
         public Form1()
         {
@@ -29,6 +31,8 @@ namespace BombSharp
             Load += delegate
             {
                 LoadGame(1);
+                tm.Interval = 200;
+                tm.Start();
             };
         }
 
@@ -139,6 +143,18 @@ namespace BombSharp
 
         private void Form1_KeyDown(object sender, KeyEventArgs e)
         {
+            //switch (e.KeyCode)
+            //{
+            //    case Keys.Escape:
+            //        Application.Exit();
+            //        break;
+            //    case Keys.Left:
+            //        ;
+            //        break;
+            //    case Keys.Right:
+            //        ;
+            //        break;
+            //}
 
         }
     }
