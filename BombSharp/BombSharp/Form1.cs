@@ -132,8 +132,9 @@ namespace BombSharp
             }
 
             //Player
-            Rectangle player = new Rectangle(0, 0, blockWidth, blockHeight);
-            g.DrawImage(Properties.sprites.player, player);
+            Rectangle player = new Rectangle(blockWidth + 7, blockHeight + 10, blockWidth - 15, blockHeight - 15);
+
+            g.DrawImage(Properties.sprites.player, player, new Rectangle(0, 0, 17, 24), GraphicsUnit.Pixel);
         }
 
         private void Form1_KeyDown(object sender, KeyEventArgs e)
