@@ -1,1 +1,11 @@
-﻿Sprite defeat 26px x 26px
+﻿Sprite Defeat
+	- Width: 26px
+	- Height: 26px
+Sprite Win
+	- Width: 18px
+	- Height: 38px
+Sprite Walk, Lift and Stun
+	- Width: 20px
+	- Height: 26px
+
+Margin Between: 1px
