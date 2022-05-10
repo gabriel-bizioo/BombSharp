@@ -15,7 +15,7 @@ namespace BombSharp
 {
     public partial class Form1 : Form
     {
-        private Block[,] blocksLvl = new Classes.Block[11, 11];
+        private Block[,] blocksLvl = new Block[11, 11];
         Bitmap bmp = null;
         Graphics g = null;
         Rectangle rec = new Rectangle();
@@ -57,7 +57,6 @@ namespace BombSharp
             g = Graphics.FromImage(bmp);
             g.Clear(Color.White);
             string map = string.Empty;
-
             switch (lvl)
             {
                 default:
