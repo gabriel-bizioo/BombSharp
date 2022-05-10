@@ -53,3 +53,17 @@ E:\Moll\repos\BombSharp\BombSharp\BombSharp\obj\Debug\BombSharp.csproj.GenerateR
 E:\Moll\repos\BombSharp\BombSharp\BombSharp\obj\Debug\BombSharp.csproj.CoreCompileInputs.cache
 E:\Moll\repos\BombSharp\BombSharp\BombSharp\obj\Debug\BombSharp.exe
 E:\Moll\repos\BombSharp\BombSharp\BombSharp\obj\Debug\BombSharp.pdb
+E:\Gabriel\repos\BombSharp\BombSharp\BombSharp\bin\Debug\BombSharp.exe.config
+E:\Gabriel\repos\BombSharp\BombSharp\BombSharp\bin\Debug\BombSharp.exe
+E:\Gabriel\repos\BombSharp\BombSharp\BombSharp\bin\Debug\BombSharp.pdb
+E:\Gabriel\repos\BombSharp\BombSharp\BombSharp\obj\Debug\BombSharp.csproj.AssemblyReference.cache
+E:\Gabriel\repos\BombSharp\BombSharp\BombSharp\obj\Debug\BombSharp.csproj.SuggestedBindingRedirects.cache
+E:\Gabriel\repos\BombSharp\BombSharp\BombSharp\obj\Debug\BombSharp.Form1.resources
+E:\Gabriel\repos\BombSharp\BombSharp\BombSharp\obj\Debug\BombSharp.Properties.audios.resources
+E:\Gabriel\repos\BombSharp\BombSharp\BombSharp\obj\Debug\BombSharp.Properties.blocks.resources
+E:\Gabriel\repos\BombSharp\BombSharp\BombSharp\obj\Debug\BombSharp.Properties.maps.resources
+E:\Gabriel\repos\BombSharp\BombSharp\BombSharp\obj\Debug\BombSharp.Properties.sprites.resources
+E:\Gabriel\repos\BombSharp\BombSharp\BombSharp\obj\Debug\BombSharp.csproj.GenerateResource.cache
+E:\Gabriel\repos\BombSharp\BombSharp\BombSharp\obj\Debug\BombSharp.csproj.CoreCompileInputs.cache
+E:\Gabriel\repos\BombSharp\BombSharp\BombSharp\obj\Debug\BombSharp.exe
+E:\Gabriel\repos\BombSharp\BombSharp\BombSharp\obj\Debug\BombSharp.pdb

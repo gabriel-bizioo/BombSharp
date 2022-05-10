@@ -19,10 +19,12 @@ namespace BombSharp
         Bitmap bmp = null;
         Graphics g = null;
         Rectangle rec = new Rectangle();
-        Player player = null;
+        Player player = new Player();
         Timer tm = new Timer();
         int blockHeight = 100;
         int blockWidth = 100;
+        int y = 0;
+        int x = 1;
 
 
         public Form1()
@@ -31,8 +33,26 @@ namespace BombSharp
             Load += delegate
             {
                 LoadGame(1);
-                tm.Interval = 200;
-                tm.Start();
+                //tm.Interval = 200;
+                //tm.Tick += delegate
+                //{
+                //    Rectangle player = new Rectangle(blockWidth + 7, blockHeight + 10, blockWidth - 15, blockHeight - 15);
+                //    if (x <= 100)
+                //    {
+                //        g.DrawImage(Properties.sprites.player, player, new Rectangle(0, y, 14, 24), GraphicsUnit.Pixel);
+
+                //        x += 20;
+                //    }
+                //    else
+                //    {
+                //        x = 1;
+
+                //        g.DrawImage(Properties.sprites.player, player, new Rectangle(0, y, 14, 24), GraphicsUnit.Pixel);
+
+                //        x += 20;
+                //    }
+                //};
+                //tm.Start();
             };
         }
 
@@ -136,25 +156,14 @@ namespace BombSharp
 
             //Player
             Rectangle player = new Rectangle(blockWidth + 7, blockHeight + 10, blockWidth - 15, blockHeight - 15);
-
-            g.DrawImage(Properties.sprites.player, player, new Rectangle(0, 0, 17, 24), GraphicsUnit.Pixel);
+            g.DrawImage(Properties.sprites.player, player, new Rectangle(y, 0, 17, 24), GraphicsUnit.Pixel);
         }
 
         private void Form1_KeyDown(object sender, KeyEventArgs e)
         {
-            //switch (e.KeyCode)
-            //{
-            //    case Keys.Escape:
-            //        Application.Exit();
-            //        break;
-            //    case Keys.Left:
-            //        ;
-            //        break;
-            //    case Keys.Right:
-            //        ;
-            //        break;
-            //}
+            player.keyMovement(e.KeyCode);
 
+            y = 26 * (int)player.playerDirection; 
         }
     }
 }
