@@ -121,6 +121,7 @@
     <Content Include="Assets\Sprites\SNES - Super Bomberman 5 JPN - Bomberman.png" />
     <Content Include="Assets\Sprites\SNES - Super Bomberman 5 JPN - Items.png" />
     <Content Include="Documentation\MapCode.txt" />
+    <Content Include="Documentation\TextFile1.txt" />
     <Content Include="Maps\LVL2 .txt" />
     <Content Include="Maps\LVL1.txt" />
   </ItemGroup>

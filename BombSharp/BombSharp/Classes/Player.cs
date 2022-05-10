@@ -11,11 +11,18 @@ namespace BombSharp.Classes
     {
         public int Speed;
         public Image spritesheet = Properties.sprites.player;
-        public Image[,] sprite_walk = new Image[3, 7];
-        public Image[,] sprite_lift = new Image[3, 12];
-        public Image[] sprite_stun = new Image[5];
-        public Image[] sprite_win = new Image[4];
-        public Image[] sprite_defeat = new Image[5];
-        public Image[] sprite_idle = new Image[7];
+        public Image[,] sprite_sliced = new Image[10, 10];
+
+        public void SliceImage(int x, int y)
+        {
+            for (int i = 0; i < x; i++)
+            {
+                for (int j = 0; j < y; j++)
+                {
+                    if()
+                    sprite_sliced[i, j] = (spritesheet as Bitmap).Clone(new Rectangle(i * resolucaox, j * resolucaoy, resolucaox, resolucaoy), spritesheet.PixelFormat);
+                }
+            }
+        }
     }
 }
