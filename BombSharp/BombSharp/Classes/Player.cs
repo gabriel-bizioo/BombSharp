@@ -12,7 +12,7 @@ namespace BombSharp.Classes
     {
         public int Speed;
         public Image spritesheet = Properties.sprites.player;
-        public Image[,] sprite_sliced = new Image[10, 10];
+        public Image[,] sprite_sliced = new Image[10, 7];
         public enum facingDirections
         {
             Up,
@@ -21,23 +21,23 @@ namespace BombSharp.Classes
             Right
         }
 
-        public facingDirections playerDirection;
+        public facingDirections playerDirection = facingDirections.Down;
 
         public void keyMovement(Keys key)
         {
             switch (key)
             {
                 case Keys.W:
-                    playerDirection = facingDirections.Up;
+                    this.playerDirection = facingDirections.Up;
                     break;
                 case Keys.A:
-                    playerDirection = facingDirections.Left;
+                    this.playerDirection = facingDirections.Left;
                     break;
                 case Keys.S:
-                    playerDirection = facingDirections.Down;
+                    this.playerDirection = facingDirections.Down;
                     break;
                 case Keys.D:
-                    playerDirection = facingDirections.Right;
+                    this.playerDirection = facingDirections.Right;
                     break;
             }
         }
