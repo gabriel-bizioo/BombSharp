@@ -35,3 +35,6 @@ C:\repos\BombSharp\BombSharp\BombSharp\obj\Debug\net6.0-windows\ref\BombSharp.dl
 E:\Gabriel\repos\BombSharp\BombSharp\BombSharp\obj\Debug\net6.0-windows\BombSharp.Properties.audio.resources
 E:\Gabriel\repos\BombSharp\BombSharp\BombSharp\obj\Debug\net6.0-windows\BombSharp.Properties.sprites.resources
 E:\Gabriel\repos\BombSharp\BombSharp\BombSharp\obj\Debug\net6.0-windows\BombSharp.Properties.Resources.resources
+C:\repos\BombSharp\BombSharp\BombSharp\obj\Debug\net6.0-windows\BombSharp.Properties.audio.resources
+C:\repos\BombSharp\BombSharp\BombSharp\obj\Debug\net6.0-windows\BombSharp.Properties.Resources.resources
+C:\repos\BombSharp\BombSharp\BombSharp\obj\Debug\net6.0-windows\BombSharp.Properties.sprites.resources

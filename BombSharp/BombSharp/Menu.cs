@@ -29,8 +29,8 @@ namespace BombSharp
 
         //incremento do y = 25
         //incremento do x = 17
-        int x = 3;
-        int y = 2;
+        int x = 1;
+        int y = 0;
 
 
         private void Menu_Load(object sender, EventArgs e)
@@ -49,15 +49,15 @@ namespace BombSharp
 
             if(x <= 88)
             {
-                g.DrawImage(img, new Rectangle(20, 20, (pictureBox1.Width/12), (pictureBox1.Height/12)), new Rectangle(x, y, 14, 24), GraphicsUnit.Pixel);
+                g.DrawImage(img, new Rectangle(20, 20, (pictureBox1.Width/12), (pictureBox1.Height/12)), new Rectangle(x, y, 15, 25), GraphicsUnit.Pixel);
 
                 x += 17;
             }
             else
             {
-                x = 3;
+                x = 1;
                 
-                g.DrawImage(img, new Rectangle(20, 20, (pictureBox1.Width/12), (pictureBox1.Height/12)), new Rectangle(x, y, 14, 24), GraphicsUnit.Pixel);
+                g.DrawImage(img, new Rectangle(20, 20, (pictureBox1.Width/12), (pictureBox1.Height/12)), new Rectangle(x, y, 15, 25), GraphicsUnit.Pixel);
 
                 x += 17;
             }

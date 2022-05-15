@@ -12,8 +12,6 @@ namespace BombSharp
             ApplicationConfiguration.Initialize();  
 
             Menu menu = new Menu();
-
-            menu.KeyPreview = true;
             
             Application.Run(menu);
         }

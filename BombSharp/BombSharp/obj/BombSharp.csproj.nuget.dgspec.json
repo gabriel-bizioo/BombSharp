@@ -1,24 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "E:\\Gabriel\\repos\\BombSharp\\BombSharp\\BombSharp\\BombSharp.csproj": {}
+    "C:\\repos\\BombSharp\\BombSharp\\BombSharp\\BombSharp.csproj": {}
   },
   "projects": {
-    "E:\\Gabriel\\repos\\BombSharp\\BombSharp\\BombSharp\\BombSharp.csproj": {
+    "C:\\repos\\BombSharp\\BombSharp\\BombSharp\\BombSharp.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "E:\\Gabriel\\repos\\BombSharp\\BombSharp\\BombSharp\\BombSharp.csproj",
+        "projectUniqueName": "C:\\repos\\BombSharp\\BombSharp\\BombSharp\\BombSharp.csproj",
         "projectName": "BombSharp",
-        "projectPath": "E:\\Gabriel\\repos\\BombSharp\\BombSharp\\BombSharp\\BombSharp.csproj",
-        "packagesPath": "C:\\Users\\Aluno\\.nuget\\packages\\",
-        "outputPath": "E:\\Gabriel\\repos\\BombSharp\\BombSharp\\BombSharp\\obj\\",
+        "projectPath": "C:\\repos\\BombSharp\\BombSharp\\BombSharp\\BombSharp.csproj",
+        "packagesPath": "C:\\Users\\bizio\\.nuget\\packages\\",
+        "outputPath": "C:\\repos\\BombSharp\\BombSharp\\BombSharp\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
         "configFilePaths": [
-          "C:\\Users\\Aluno\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Users\\bizio\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -61,7 +57,7 @@
               "privateAssets": "none"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.101\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.201\\RuntimeIdentifierGraph.json"
         }
       }
     }
