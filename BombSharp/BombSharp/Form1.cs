@@ -24,22 +24,15 @@ namespace BombSharp
         int blockHeight = 100;
         int blockWidth = 100;
         int y = 0;
-        int x = 1;
 
 
         public Form1()
         {
             InitializeComponent();
             Load += delegate
-            {
+            {                    
                 LoadGame(1);
-                //tm.Interval = 200;
-                //tm.Tick += delegate
-                //{
-                //    Rectangle player = new Rectangle(blockWidth + 7, blockHeight + 10, blockWidth - 15, blockHeight - 15);
-                //    g.DrawImage(Properties.sprites.player, player, new Rectangle(0, y, 17, 24), GraphicsUnit.Pixel);
-                //};
-                //tm.Start();
+                LoadPlayer();
             };
         }
 
@@ -140,17 +133,38 @@ namespace BombSharp
                 pictureBox1.Image = bmp;
                 strReader.Close();
             }
+            
+            pictureBox1.Controls.Add(playerBox);
+        }
 
-            //Player
-            Rectangle player = new Rectangle(blockWidth + 7, blockHeight + 10, blockWidth - 15, blockHeight - 15);
-            g.DrawImage(Properties.sprites.player, player, new Rectangle(0, y, 17, 24), GraphicsUnit.Pixel);
+        public void LoadPlayer()
+        {
+            Rectangle player_size = new Rectangle(blockWidth + 2, blockHeight + 5, blockWidth - 15, blockHeight-5);
+            playerBox.Size = player_size.Size;
+            playerBox.Location = player_size.Location;
+            playerBox.BackColor = Color.Transparent;
+            
+            bmp = new Bitmap(playerBox.Width, playerBox.Height);
+            g = Graphics.FromImage(bmp);
+            g.InterpolationMode = InterpolationMode.NearestNeighbor;
+            
+            tm.Interval = 100;
+            tm.Tick += delegate
+            {
+                g.Clear(Color.Transparent);
+                g.DrawImage(Properties.sprites.player, new Rectangle(0, 0, playerBox.Width, playerBox.Height), new Rectangle(0, y, 17, 26), GraphicsUnit.Pixel);
+
+                playerBox.Image = bmp;
+            };
+            tm.Start();
         }
 
         private void Form1_KeyDown(object sender, KeyEventArgs e)
         {
             player.keyMovement(e.KeyCode);
 
-            y = 26 * (int)player.playerDirection; 
+            y = 27 * (int)player.playerDirection;
+
         }
     }
 }

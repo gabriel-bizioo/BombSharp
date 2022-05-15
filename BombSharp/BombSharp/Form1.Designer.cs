@@ -29,7 +29,9 @@
         private void InitializeComponent()
         {
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.playerBox = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.playerBox)).BeginInit();
             this.SuspendLayout();
             // 
             // pictureBox1
@@ -41,17 +43,27 @@
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
             // 
+            // playerBox
+            // 
+            this.playerBox.Location = new System.Drawing.Point(12, 21);
+            this.playerBox.Name = "playerBox";
+            this.playerBox.Size = new System.Drawing.Size(100, 50);
+            this.playerBox.TabIndex = 1;
+            this.playerBox.TabStop = false;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1008, 729);
+            this.Controls.Add(this.playerBox);
             this.Controls.Add(this.pictureBox1);
             this.KeyPreview = true;
             this.Name = "Form1";
             this.Text = "Form1";
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyDown);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.playerBox)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -59,6 +71,7 @@
         #endregion
 
         private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.PictureBox playerBox;
     }
 }
 

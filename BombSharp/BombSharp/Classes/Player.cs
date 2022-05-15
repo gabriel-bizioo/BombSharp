@@ -15,10 +15,11 @@ namespace BombSharp.Classes
         public Image[,] sprite_sliced = new Image[10, 7];
         public enum facingDirections
         {
-            Up,
-            Left,
             Down,
-            Right
+            Right,
+            Up,
+            Left           
+            
         }
 
         public facingDirections playerDirection = facingDirections.Down;
@@ -48,7 +49,6 @@ namespace BombSharp.Classes
         //    {
         //        for (int j = 0; j < y; j++)
         //        {
-        //            if()
         //            sprite_sliced[i, j] = (spritesheet as Bitmap).Clone(new Rectangle(i * resolucaox, j * resolucaoy, resolucaox, resolucaoy), spritesheet.PixelFormat);
         //        }
         //    }
