@@ -82,3 +82,4 @@ C:\repos\BombSharp\BombSharp\BombSharp\obj\Debug\BombSharp.csproj.CoreCompileInp
 C:\repos\BombSharp\BombSharp\BombSharp\obj\Debug\BombSharp.exe
 C:\repos\BombSharp\BombSharp\BombSharp\obj\Debug\BombSharp.pdb
 C:\repos\BombSharp\BombSharp\BombSharp\obj\Debug\BombSharp.Properties.Resources.resources
+E:\Moll\repos\BombSharp\BombSharp\BombSharp\obj\Debug\BombSharp.Properties.Resources.resources

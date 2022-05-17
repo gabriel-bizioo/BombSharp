@@ -104,17 +104,17 @@ namespace BombSharp
                         {
                             //Destructible
                             case "D":
-                                g.DrawImage(Properties.blocks.Destructible, new Rectangle((int)currentPosX, (int)currentPosY, (int)blockWidth, (int)blockHeight), 0, 0, 16, 16, GraphicsUnit.Pixel, attributes);
+                                g.DrawImage(blockDestructible, new Rectangle((int)currentPosX, (int)currentPosY, (int)blockWidth, (int)blockHeight), 0, 0, 16, 16, GraphicsUnit.Pixel, attributes);
                                 blocktype = BlockType.Destructible;
                                 break;
                             //Black Space
                             case "B":
-                                g.DrawImage(Properties.blocks.Empty, new Rectangle((int)currentPosX, (int)currentPosY, (int)blockWidth, (int)blockHeight), 0, 0, 16, 16, GraphicsUnit.Pixel, attributes);
+                                g.DrawImage(blockEmpty, new Rectangle((int)currentPosX, (int)currentPosY, (int)blockWidth, (int)blockHeight), 0, 0, 16, 16, GraphicsUnit.Pixel, attributes);
                                 blocktype = BlockType.Empty;
                                 break;
                             //Indestructible
                             case "C":
-                                g.DrawImage(Properties.blocks.NonDestructible, new Rectangle((int)currentPosX, (int)currentPosY, (int)blockWidth, (int)blockHeight), 0, 0, 16, 16, GraphicsUnit.Pixel, attributes);
+                                g.DrawImage(blockNonDestructible, new Rectangle((int)currentPosX, (int)currentPosY, (int)blockWidth, (int)blockHeight), 0, 0, 16, 16, GraphicsUnit.Pixel, attributes);
                                 blocktype = BlockType.NonDestructible;
                                 break;
                             default:
@@ -139,7 +139,7 @@ namespace BombSharp
 
         public void LoadPlayer()
         {
-            Rectangle player_size = new Rectangle(blockWidth + 2, blockHeight + 5, blockWidth - 15, blockHeight-5);
+            Rectangle player_size = new Rectangle(blockWidth + 2, blockHeight + 5, blockWidth - 15, blockHeight - 5);
             playerBox.Size = player_size.Size;
             playerBox.Location = player_size.Location;
             playerBox.BackColor = Color.Transparent;
@@ -147,12 +147,14 @@ namespace BombSharp
             bmp = new Bitmap(playerBox.Width, playerBox.Height);
             g = Graphics.FromImage(bmp);
             g.InterpolationMode = InterpolationMode.NearestNeighbor;
-            
+
+            var playerSS = Properties.sprites.player;
+
             tm.Interval = 100;
             tm.Tick += delegate
             {
                 g.Clear(Color.Transparent);
-                g.DrawImage(Properties.sprites.player, new Rectangle(0, 0, playerBox.Width, playerBox.Height), new Rectangle(0, y, 17, 26), GraphicsUnit.Pixel);
+                g.DrawImage(playerSS, new Rectangle(0, 0, playerBox.Width, playerBox.Height), new Rectangle(21 * 0, y, 17, 26), GraphicsUnit.Pixel);
 
                 playerBox.Image = bmp;
             };
@@ -162,9 +164,8 @@ namespace BombSharp
         private void Form1_KeyDown(object sender, KeyEventArgs e)
         {
             player.keyMovement(e.KeyCode);
-
+            
             y = 27 * (int)player.playerDirection;
-
         }
     }
 }
