@@ -13,3 +13,7 @@ E:\gabriel\BombSharp\BombSharp\BombSharp\bin\Debug\BombSharp.exe
 E:\gabriel\BombSharp\BombSharp\BombSharp\bin\Debug\BombSharp.pdb
 E:\gabriel\BombSharp\BombSharp\BombSharp\obj\Debug\BombSharp.exe
 E:\gabriel\BombSharp\BombSharp\BombSharp\obj\Debug\BombSharp.pdb
+E:\Moll\repos\BombSharp\BombSharp\BombSharp\obj\Debug\BombSharp.csproj.AssemblyReference.cache
+E:\Moll\repos\BombSharp\BombSharp\BombSharp\obj\Debug\BombSharp.csproj.SuggestedBindingRedirects.cache
+E:\Moll\repos\BombSharp\BombSharp\BombSharp\obj\Debug\BombSharp.exe
+E:\Moll\repos\BombSharp\BombSharp\BombSharp\obj\Debug\BombSharp.pdb
