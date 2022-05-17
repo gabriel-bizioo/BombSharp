@@ -21,10 +21,9 @@ namespace BombSharp
         Rectangle rec = new Rectangle();
         Player player = new Player();
         Timer tm = new Timer();
-        int blockHeight = 100;
-        int blockWidth = 100;
+        int blockHeight = 968 / 11;
+        int blockWidth = 1000 / 11;
         int y = 0;
-
 
         public Form1()
         {
@@ -166,6 +165,30 @@ namespace BombSharp
             player.keyMovement(e.KeyCode);
             
             y = 27 * (int)player.playerDirection;
+
+            moveTimerEvent(sender, e);
+        }
+
+        public void moveTimerEvent(object sender, KeyEventArgs e)
+        {
+
+            if (player.playerDirection == Player.facingDirections.Down && playerBox.Top < blockHeight*10)
+            {
+                playerBox.Top += player.speed;
+            }
+            //blocksLvl[0,0].BlockType == BlockType.Empty
+            if (player.playerDirection == Player.facingDirections.Right && playerBox.Left < blockHeight*10)
+            {
+                playerBox.Left += player.speed;
+            }
+            if (player.playerDirection == Player.facingDirections.Up && playerBox.Top > 0)
+            {
+                playerBox.Top -= player.speed;
+            }
+            if (player.playerDirection == Player.facingDirections.Left && playerBox.Left > 0)
+            {
+                playerBox.Left -= player.speed;
+            }
         }
     }
 }

@@ -10,7 +10,7 @@ namespace BombSharp.Classes
 {
     public class Player
     {
-        public int Speed = 12;
+        public int speed = 12;
         public Image spritesheet = Properties.sprites.player;
         public Image[,] sprite_sliced = new Image[10, 7];
         public enum facingDirections
@@ -42,6 +42,8 @@ namespace BombSharp.Classes
                     break;
             }
         }
+
+        
 
         //public void SliceImage(int x, int y)
         //{
