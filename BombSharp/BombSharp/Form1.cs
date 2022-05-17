@@ -153,11 +153,8 @@ namespace BombSharp
             tm.Tick += delegate
             {
                 g.Clear(Color.Transparent);
-<<<<<<< HEAD
+
                 g.DrawImage(playerSS, new Rectangle(0, 0, playerBox.Width, playerBox.Height), new Rectangle(21 * 0, y, 17, 26), GraphicsUnit.Pixel);
-=======
-                g.DrawImage(playerSS, new Rectangle(0, 0, playerBox.Width, playerBox.Height), new Rectangle(0, y, 17, 26), GraphicsUnit.Pixel);
->>>>>>> 4e11d3964792a1ed015ed37d39d77c2b3431c2b8
 
                 playerBox.Image = bmp;
             };
