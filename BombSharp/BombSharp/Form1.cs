@@ -147,12 +147,14 @@ namespace BombSharp
             bmp = new Bitmap(playerBox.Width, playerBox.Height);
             g = Graphics.FromImage(bmp);
             g.InterpolationMode = InterpolationMode.NearestNeighbor;
-            
+
+            var playerSS = Properties.sprites.player;
+
             tm.Interval = 100;
             tm.Tick += delegate
             {
                 g.Clear(Color.Transparent);
-                g.DrawImage(Properties.sprites.player, new Rectangle(0, 0, playerBox.Width, playerBox.Height), new Rectangle(0, y, 17, 26), GraphicsUnit.Pixel);
+                g.DrawImage(playerSS, new Rectangle(0, 0, playerBox.Width, playerBox.Height), new Rectangle(0, y, 17, 26), GraphicsUnit.Pixel);
 
                 playerBox.Image = bmp;
             };
