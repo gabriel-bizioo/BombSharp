@@ -18,8 +18,8 @@ namespace BombSharp.Classes
             Down,
             Right,
             Up,
-            Left           
-            
+            Left
+
         }
 
         public facingDirections playerDirection = facingDirections.Down;
@@ -43,7 +43,7 @@ namespace BombSharp.Classes
             }
         }
 
-        
+
 
         //public void SliceImage(int x, int y)
         //{
@@ -56,4 +56,6 @@ namespace BombSharp.Classes
         //    }
         //}
     }
+
 }
+    

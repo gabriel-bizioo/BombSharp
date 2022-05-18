@@ -21,8 +21,8 @@ namespace BombSharp
         Rectangle rec = new Rectangle();
         Player player = new Player();
         Timer tm = new Timer();
-        int blockHeight = 968 / 11;
-        int blockWidth = 1000 / 11;
+        int blockHeight = 1000 / 11;
+        int blockWidth = 1000/ 11;
         int y = 0;
 
         public Form1()

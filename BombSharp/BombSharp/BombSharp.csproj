@@ -48,7 +48,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Classes\Block.cs" />
+    <Compile Include="Classes\CollisionInfo.cs" />
+    <Compile Include="Classes\HitBox.cs" />
     <Compile Include="Classes\Player.cs" />
+    <Compile Include="Classes\PlayerHitBox.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
