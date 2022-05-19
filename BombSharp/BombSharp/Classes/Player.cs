@@ -10,16 +10,22 @@ namespace BombSharp.Classes
 {
     public class Player
     {
+        public Player(Rectangle playerHitbox)
+        {
+            this.player_size = playerHitbox;
+        }
+
         public int speed = 12;
         public Image spritesheet = Properties.sprites.player;
         public Image[,] sprite_sliced = new Image[10, 7];
+        public Rectangle player_size;       
+
         public enum facingDirections
         {
             Down,
             Right,
             Up,
             Left
-
         }
 
         public facingDirections playerDirection = facingDirections.Down;
@@ -42,8 +48,6 @@ namespace BombSharp.Classes
                     break;
             }
         }
-
-
 
         //public void SliceImage(int x, int y)
         //{

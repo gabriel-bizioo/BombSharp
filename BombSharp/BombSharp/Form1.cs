@@ -18,12 +18,14 @@ namespace BombSharp
         private Block[,] blocksLvl = new Block[11, 11];
         Bitmap bmp = null;
         Graphics g = null;
-        Rectangle rec = new Rectangle();
-        Player player = new Player();
+        Player player = new Player(new Rectangle(Block.Width + 2, Block.Height + 5, Block.Width - 15, Block.Height - 5));
+        Rectangle rec = new Rectangle();      
         Timer tm = new Timer();
-        int blockHeight = 1000 / 11;
-        int blockWidth = 1000/ 11;
+        int blockHeight = Block.Height;
+        int blockWidth = Block.Width;
         int y = 0;
+        
+
 
         public Form1()
         {
@@ -138,9 +140,9 @@ namespace BombSharp
 
         public void LoadPlayer()
         {
-            Rectangle player_size = new Rectangle(blockWidth + 2, blockHeight + 5, blockWidth - 15, blockHeight - 5);
-            playerBox.Size = player_size.Size;
-            playerBox.Location = player_size.Location;
+
+            playerBox.Size = player.player_size.Size;
+            playerBox.Location = player.player_size.Location;
             playerBox.BackColor = Color.Transparent;
             
             bmp = new Bitmap(playerBox.Width, playerBox.Height);

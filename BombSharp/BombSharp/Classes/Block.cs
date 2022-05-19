@@ -16,8 +16,8 @@ namespace BombSharp.Classes
     }
     public class Block
     {
-        public int Height { get; set; } = 50;
-        public int Width { get; set; } = 50;
+        public static int Height { get; set; } = 1000 / 11;
+        public static int Width { get; set; } = 1000 / 11;
 
         public Graphics BlockObj { get; set; }
         public BlockType BlockType { get; set; }

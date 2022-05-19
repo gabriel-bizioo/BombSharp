@@ -30,6 +30,8 @@ namespace BombSharp.Classes
                   a2 = (q2.Y - p2.Y) / (q2.X - p2.X),
                   b1 = q1.Y - a1 * q1.X,
                   b2 = q2.Y - a2 * q2.X;
+            if (a1 - a2 >= -float.Epsilon && a1 - a2 <= float.Epsilon)
+                return false;
             float x = 0, y = 0;
             x = -(b1 - b2) / (a1 - a2);
             y = a1 * x + b1;
