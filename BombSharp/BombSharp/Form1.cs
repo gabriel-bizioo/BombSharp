@@ -21,6 +21,8 @@ namespace BombSharp
         Rectangle rec = new Rectangle();
         Player player = new Player();
         Timer tm = new Timer();
+        //int blockHeight = 968 / 11;
+        //int blockWidth = 1000 / 11;
         int blockHeight = 968 / 11;
         int blockWidth = 1000 / 11;
         int y = 0;
@@ -35,16 +37,30 @@ namespace BombSharp
             };
         }
 
-        public Block SearchElementInArrays(Graphics element)
+        public Block SearchElementInArrays(Point location, Player.facingDirections flag)
         {
-            Block result = null;
-            for(int i = 0; i < blocksLvl.GetLength(0); i++)
+            Block result = blocksLvl[0, 0]; ;
+            for(int i = 1; i < 10; i++)
             {
-                for(int j = 0; j < blocksLvl.GetLength(i); j++)
+                for(int j = 1; j < 10; j++)
                 {
-                    if (element == blocksLvl[i, j].BlockObj)
+                    if ((location.X >= blocksLvl[i, j].posX && location.X <= blocksLvl[i, j].posX + blockHeight) && (location.Y >= blocksLvl[i, j].posY && location.Y <= blocksLvl[i, j].posY + blockWidth))
                     {
-                        result = blocksLvl[i, j];
+                        switch (flag)
+                        {
+                            case Player.facingDirections.Left:
+                                result = blocksLvl[i - 1, j];
+                                break;
+                            case Player.facingDirections.Right:
+                                result = blocksLvl[i + 1, j];
+                                break;
+                            case Player.facingDirections.Up:
+                                result = blocksLvl[i, j - 1];
+                                break;
+                            case Player.facingDirections.Down:
+                                result = blocksLvl[i, j + 1];
+                                break;
+                        }
                     }
                 }
             }
@@ -103,24 +119,24 @@ namespace BombSharp
                         {
                             //Destructible
                             case "D":
-                                g.DrawImage(blockDestructible, new Rectangle((int)currentPosX, (int)currentPosY, (int)blockWidth, (int)blockHeight), 0, 0, 16, 16, GraphicsUnit.Pixel, attributes);
+                                g.DrawImage(blockDestructible, new Rectangle(currentPosX, currentPosY, blockWidth, blockHeight), 0, 0, 16, 16, GraphicsUnit.Pixel, attributes);
                                 blocktype = BlockType.Destructible;
                                 break;
                             //Black Space
                             case "B":
-                                g.DrawImage(blockEmpty, new Rectangle((int)currentPosX, (int)currentPosY, (int)blockWidth, (int)blockHeight), 0, 0, 16, 16, GraphicsUnit.Pixel, attributes);
+                                g.DrawImage(blockEmpty, new Rectangle(currentPosX, currentPosY, blockWidth, blockHeight), 0, 0, 16, 16, GraphicsUnit.Pixel, attributes);
                                 blocktype = BlockType.Empty;
                                 break;
                             //Indestructible
                             case "C":
-                                g.DrawImage(blockNonDestructible, new Rectangle((int)currentPosX, (int)currentPosY, (int)blockWidth, (int)blockHeight), 0, 0, 16, 16, GraphicsUnit.Pixel, attributes);
+                                g.DrawImage(blockNonDestructible, new Rectangle(currentPosX, currentPosY, blockWidth, blockHeight), 0, 0, 16, 16, GraphicsUnit.Pixel, attributes);
                                 blocktype = BlockType.NonDestructible;
                                 break;
                             default:
                                 throw new Exception("Invalid character.");
                         }
 
-                        this.blocksLvl[iRow, iCol] = new Block(g, blocktype.Value);
+                        this.blocksLvl[iRow, iCol] = new Block(g, blocktype.Value, currentPosX, currentPosY);
                         iCol++;
                         currentPosX += blockWidth;
                     }
@@ -154,7 +170,7 @@ namespace BombSharp
             {
                 g.Clear(Color.Transparent);
 
-                g.DrawImage(playerSS, new Rectangle(0, 0, playerBox.Width, playerBox.Height), new Rectangle(21 * 0, y, 17, 26), GraphicsUnit.Pixel);
+                g.DrawImage(playerSS, new Rectangle(0, 0, playerBox.Width, playerBox.Height), new Rectangle(0, y, 17, 26), GraphicsUnit.Pixel);
 
                 playerBox.Image = bmp;
             };
@@ -163,7 +179,7 @@ namespace BombSharp
 
         private void Form1_KeyDown(object sender, KeyEventArgs e)
         {
-            player.keyMovement(e.KeyCode);
+            player.keyMovement(e.KeyCode); 
             
             y = 27 * (int)player.playerDirection;
 
@@ -172,23 +188,39 @@ namespace BombSharp
 
         public void moveTimerEvent(object sender, KeyEventArgs e)
         {
+            Block b;
 
-            if (player.playerDirection == Player.facingDirections.Down && playerBox.Top < blockHeight*10)
+            if (player.playerDirection == Player.facingDirections.Down)
             {
-                playerBox.Top += player.speed;
+                b = SearchElementInArrays(playerBox.Location, Player.facingDirections.Down);
+                if (b.BlockType == BlockType.Empty)
+                {
+                    playerBox.Top += player.speed;
+                }
             }
-            //blocksLvl[0,0].BlockType == BlockType.Empty
-            if (player.playerDirection == Player.facingDirections.Right && playerBox.Left < blockHeight*10)
+            if (player.playerDirection == Player.facingDirections.Right)
             {
-                playerBox.Left += player.speed;
+                b = SearchElementInArrays(playerBox.Location, Player.facingDirections.Right);
+                if (b.BlockType == BlockType.Empty)
+                {
+                    playerBox.Left += player.speed;
+                }
             }
-            if (player.playerDirection == Player.facingDirections.Up && playerBox.Top > 0)
+            if (player.playerDirection == Player.facingDirections.Up)
             {
-                playerBox.Top -= player.speed;
+                b = SearchElementInArrays(playerBox.Location, Player.facingDirections.Up);
+                if (b.BlockType == BlockType.Empty)
+                {
+                    playerBox.Top -= player.speed;
+                }
             }
-            if (player.playerDirection == Player.facingDirections.Left && playerBox.Left > 0)
+            if (player.playerDirection == Player.facingDirections.Left)
             {
-                playerBox.Left -= player.speed;
+                b = SearchElementInArrays(playerBox.Location, Player.facingDirections.Left);
+                if (b.BlockType == BlockType.Empty)
+                {
+                    playerBox.Left -= player.speed;
+                }
             }
         }
     }
