@@ -8,15 +8,16 @@ namespace BombSharp.Classes
 {
     public class CollisionManager
     {
+        public List<Player> PlayerList = new List<Player>();
         public List<Entity> Entities { get; set; } = new List<Entity>();
 
         public void HandleCollision()
         {
-            for(int i = 0; i < Entities.Count; i++)
+            foreach (var entity in Entities)
             {
-                for(int j = i; j < Entities.Count; j++)
+                foreach (var player in PlayerList)
                 {
-                    Entities[i].CheckCollision(Entities[j]);
+                    player.CheckCollision(entity);
                 }
             }
         }

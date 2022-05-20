@@ -20,7 +20,10 @@ namespace BombSharp.Classes
 
         public void CheckCollision(Entity entity)
         {
-            var info = HitBox.IsColliding(entity.HitBox);
+            //var info = HitBox.IsColliding(entity.HitBox);
+            //if (info.IsColliding)
+            //    OnCollision(info);
+            var info = entity.HitBox.IsColliding(HitBox);
             if (info.IsColliding)
                 OnCollision(info);
         }

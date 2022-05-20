@@ -25,11 +25,10 @@ namespace BombSharp.Classes
 
         public Block(Graphics obj, BlockType type, Rectangle size) : base(null)
         {
-            
             this.BlockObj = obj;
             this.BlockType = type;
             this.block_size = size;
-            //if(type != )
+            this.HitBox = HitBox.FromBlock(this);
         }
 
         public override void Draw(Graphics g)

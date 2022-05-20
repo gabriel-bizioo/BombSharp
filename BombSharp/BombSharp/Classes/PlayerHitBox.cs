@@ -8,18 +8,17 @@ namespace BombSharp.Classes
         public PlayerHitBox(Player player)
         {
             this.player = player;
-            this.Points = new PointF[]
-            {
-                new PointF(player.player_size.X, player.player_size.Y),
-                new PointF(player.player_size.Right, player.player_size.Y),
-                new PointF(player.player_size.Right, player.player_size.Bottom),
-                new PointF(player.player_size.X, player.player_size.Bottom),
-                new PointF(player.player_size.X, player.player_size.Y)
-            };
         }
 
-        public Player player;
+        private Player player;
 
-        public override PointF[] Points {get;}
+        public override PointF[] Points => new PointF[]
+        {
+            new PointF(player.PlayerPictureBox.Location.X, player.PlayerPictureBox.Location.Y),
+            new PointF(player.PlayerPictureBox.Right, player.PlayerPictureBox.Location.Y),
+            new PointF(player.PlayerPictureBox.Right, player.PlayerPictureBox.Bottom),
+            new PointF(player.PlayerPictureBox.Location.X, player.PlayerPictureBox.Bottom),
+            new PointF(player.PlayerPictureBox.Location.X, player.PlayerPictureBox.Location.Y)
+        };
     }
 }

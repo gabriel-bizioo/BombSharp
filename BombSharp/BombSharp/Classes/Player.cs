@@ -8,20 +8,20 @@ using System.Windows.Forms;
 
 namespace BombSharp.Classes
 {
-    public class Player: Entity
+    public class Player : Entity
     {
-        public Player(Rectangle player_size) : base(null)
+        public Player(PictureBox player_size) : base(null)
         {
-            this.player_size = player_size;
-            this.HitBox = HitBox.fromPlayer(this);
+            this.PlayerPictureBox = player_size;
+            this.HitBox = HitBox.FromPlayer(this);
         }
 
-        public int speed = 12;
+        public int speed = 4;
 
         public Image spritesheet = Properties.sprites.player;
         public Image[,] sprite_sliced = new Image[10, 7];
 
-        public Rectangle player_size;
+        public PictureBox PlayerPictureBox;
 
         public enum facingDirections
         {
@@ -56,7 +56,38 @@ namespace BombSharp.Classes
 
         public override void OnCollision(CollisionInfo info)
         {
-            this.speed = 0;
+            if (info.SideA.Y == info.SideB.Y)
+            {
+                if (info.SideA.Y > this.PlayerPictureBox.Location.Y)
+                {
+                    this.PlayerPictureBox.Location = new Point(
+                        this.PlayerPictureBox.Location.X,
+                        (int)info.SideA.Y - this.PlayerPictureBox.Height);
+                }
+
+                //if (info.SideA.Y < this.PlayerPictureBox.Location.Y + this.PlayerPictureBox.Height)
+                //{
+                //    this.PlayerPictureBox.Location = new Point(
+                //        this.PlayerPictureBox.Location.X,
+                //        (int)info.SideA.Y);                     
+                //}
+            }
+
+            if (info.SideA.X == info.SideB.X)
+            {
+                if (info.SideA.X > this.PlayerPictureBox.Location.X + this.PlayerPictureBox.Width)
+                {
+                    this.PlayerPictureBox.Location = new Point(
+                        (int)info.SideA.X,
+                        this.PlayerPictureBox.Location.Y);
+                }
+                //if (info.SideA.X < this.PlayerPictureBox.Location.X + this.PlayerPictureBox.Width)
+                //{
+                //    this.PlayerPictureBox.Location = new Point(
+                //        (int)info.SideA.X - this.PlayerPictureBox.Width,
+                //        this.PlayerPictureBox.Location.Y);
+                //}
+            }
         }
 
         //public void SliceImage(int x, int y)

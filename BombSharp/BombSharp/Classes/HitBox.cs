@@ -7,10 +7,10 @@ namespace BombSharp.Classes
     {
         public abstract PointF[] Points { get; }
 
-        public static PlayerHitBox fromPlayer(Player player)
-               => new PlayerHitBox(player);
+        public static PlayerHitBox FromPlayer(Player player)
+            => new PlayerHitBox(player);
 
-        public static BlockHitBox fromBLock(Block block)
+        public static BlockHitBox FromBlock(Block block)
             => new BlockHitBox(block);
 
         public virtual CollisionInfo IsColliding(HitBox hitBox)

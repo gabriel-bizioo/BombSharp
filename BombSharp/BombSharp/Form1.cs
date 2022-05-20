@@ -19,7 +19,7 @@ namespace BombSharp
         CollisionManager manager = new CollisionManager();
         Bitmap bmp = null;
         Graphics g = null;
-        Player player = new Player(new Rectangle(Block.Width + 2, Block.Height + 5, Block.Width - 15, Block.Height - 5));
+        Player player = null;
         Rectangle rec = new Rectangle();      
         Timer tm = new Timer();
         int blockHeight = Block.Height;
@@ -106,23 +106,24 @@ namespace BombSharp
                         {
                             //Destructible
                             case "D":
-                                g.DrawImage(blockDestructible, new Rectangle(currentPosX, currentPosY, blockWidth, blockHeight), 0, 0, 16, 16, GraphicsUnit.Pixel, attributes);
+                                g.DrawImage(blockDestructible, rec, 0, 0, 16, 16, GraphicsUnit.Pixel, attributes);
                                 blocktype = BlockType.Destructible;
                                 break;
                             //Black Space
                             case "B":
-                                g.DrawImage(blockEmpty, new Rectangle(currentPosX, currentPosY, blockWidth, blockHeight), 0, 0, 16, 16, GraphicsUnit.Pixel, attributes);
+                                g.DrawImage(blockEmpty, rec, 0, 0, 16, 16, GraphicsUnit.Pixel, attributes);
                                 blocktype = BlockType.Empty;
                                 break;
                             //Indestructible
                             case "C":
-                                g.DrawImage(blockNonDestructible, new Rectangle(currentPosX, currentPosY, blockWidth, blockHeight), 0, 0, 16, 16, GraphicsUnit.Pixel, attributes);
+                                g.DrawImage(blockNonDestructible, rec, 0, 0, 16, 16, GraphicsUnit.Pixel, attributes);
                                 blocktype = BlockType.NonDestructible;
                                 break;
                             default:
                                 throw new Exception("Invalid character.");
                         }
-                        manager.Entities.Add(new Block(g, blocktype.Value, rec));
+                        if (blocktype.Value != BlockType.Empty) 
+                            manager.Entities.Add(new Block(g, blocktype.Value, rec));
                         this.blocksLvl[iRow, iCol] = new Block(g, blocktype.Value, rec);
                         iCol++;
                         currentPosX += blockWidth;
@@ -141,10 +142,12 @@ namespace BombSharp
 
         public void LoadPlayer()
         {
-            manager.Entities.Add(player);
+            player = new Player(playerBox);
 
-            playerBox.Size = player.player_size.Size;
-            playerBox.Location = player.player_size.Location;
+            manager.PlayerList.Add(player);
+
+            playerBox.Size = player.PlayerPictureBox.Size;
+            playerBox.Location = player.PlayerPictureBox.Location;
             playerBox.BackColor = Color.Transparent;
             
             bmp = new Bitmap(playerBox.Width, playerBox.Height);
@@ -153,7 +156,7 @@ namespace BombSharp
 
             var playerSS = Properties.sprites.player;
 
-            tm.Interval = 100;
+            tm.Interval = 25;
             tm.Tick += delegate
             {
                 manager.HandleCollision();

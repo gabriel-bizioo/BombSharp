@@ -47,7 +47,7 @@
             // 
             this.playerBox.Location = new System.Drawing.Point(12, 21);
             this.playerBox.Name = "playerBox";
-            this.playerBox.Size = new System.Drawing.Size(100, 50);
+            this.playerBox.Size = new System.Drawing.Size(53, 50);
             this.playerBox.TabIndex = 1;
             this.playerBox.TabStop = false;
             // 
