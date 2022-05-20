@@ -8,17 +8,20 @@ using System.Windows.Forms;
 
 namespace BombSharp.Classes
 {
-    public class Player
+    public class Player: Entity
     {
-        public Player(Rectangle playerHitbox)
+        public Player(Rectangle player_size) : base(null)
         {
-            this.player_size = playerHitbox;
+            this.player_size = player_size;
+            this.HitBox = HitBox.fromPlayer(this);
         }
 
         public int speed = 12;
+
         public Image spritesheet = Properties.sprites.player;
         public Image[,] sprite_sliced = new Image[10, 7];
-        public Rectangle player_size;       
+
+        public Rectangle player_size;
 
         public enum facingDirections
         {
@@ -49,6 +52,13 @@ namespace BombSharp.Classes
             }
         }
 
+        public override void Draw(Graphics g) { }
+
+        public override void OnCollision(CollisionInfo info)
+        {
+            this.speed = 0;
+        }
+
         //public void SliceImage(int x, int y)
         //{
         //    for (int i = 0; i < x; i++)
@@ -62,4 +72,3 @@ namespace BombSharp.Classes
     }
 
 }
-    

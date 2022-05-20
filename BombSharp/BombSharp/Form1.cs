@@ -16,6 +16,7 @@ namespace BombSharp
     public partial class Form1 : Form
     {
         private Block[,] blocksLvl = new Block[11, 11];
+        CollisionManager manager = new CollisionManager();
         Bitmap bmp = null;
         Graphics g = null;
         Player player = new Player(new Rectangle(Block.Width + 2, Block.Height + 5, Block.Width - 15, Block.Height - 5));
@@ -105,24 +106,24 @@ namespace BombSharp
                         {
                             //Destructible
                             case "D":
-                                g.DrawImage(blockDestructible, new Rectangle((int)currentPosX, (int)currentPosY, (int)blockWidth, (int)blockHeight), 0, 0, 16, 16, GraphicsUnit.Pixel, attributes);
+                                g.DrawImage(blockDestructible, new Rectangle(currentPosX, currentPosY, blockWidth, blockHeight), 0, 0, 16, 16, GraphicsUnit.Pixel, attributes);
                                 blocktype = BlockType.Destructible;
                                 break;
                             //Black Space
                             case "B":
-                                g.DrawImage(blockEmpty, new Rectangle((int)currentPosX, (int)currentPosY, (int)blockWidth, (int)blockHeight), 0, 0, 16, 16, GraphicsUnit.Pixel, attributes);
+                                g.DrawImage(blockEmpty, new Rectangle(currentPosX, currentPosY, blockWidth, blockHeight), 0, 0, 16, 16, GraphicsUnit.Pixel, attributes);
                                 blocktype = BlockType.Empty;
                                 break;
                             //Indestructible
                             case "C":
-                                g.DrawImage(blockNonDestructible, new Rectangle((int)currentPosX, (int)currentPosY, (int)blockWidth, (int)blockHeight), 0, 0, 16, 16, GraphicsUnit.Pixel, attributes);
+                                g.DrawImage(blockNonDestructible, new Rectangle(currentPosX, currentPosY, blockWidth, blockHeight), 0, 0, 16, 16, GraphicsUnit.Pixel, attributes);
                                 blocktype = BlockType.NonDestructible;
                                 break;
                             default:
                                 throw new Exception("Invalid character.");
                         }
-
-                        this.blocksLvl[iRow, iCol] = new Block(g, blocktype.Value);
+                        manager.Entities.Add(new Block(g, blocktype.Value, rec));
+                        this.blocksLvl[iRow, iCol] = new Block(g, blocktype.Value, rec);
                         iCol++;
                         currentPosX += blockWidth;
                     }
@@ -140,6 +141,7 @@ namespace BombSharp
 
         public void LoadPlayer()
         {
+            manager.Entities.Add(player);
 
             playerBox.Size = player.player_size.Size;
             playerBox.Location = player.player_size.Location;
@@ -154,6 +156,7 @@ namespace BombSharp
             tm.Interval = 100;
             tm.Tick += delegate
             {
+                manager.HandleCollision();
                 g.Clear(Color.Transparent);
 
                 g.DrawImage(playerSS, new Rectangle(0, 0, playerBox.Width, playerBox.Height), new Rectangle(21 * 0, y, 17, 26), GraphicsUnit.Pixel);

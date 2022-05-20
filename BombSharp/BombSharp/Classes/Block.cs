@@ -14,17 +14,27 @@ namespace BombSharp.Classes
         Destructible,
         Empty
     }
-    public class Block
+    public class Block : Entity
     {
         public static int Height { get; set; } = 1000 / 11;
         public static int Width { get; set; } = 1000 / 11;
 
         public Graphics BlockObj { get; set; }
         public BlockType BlockType { get; set; }
-        public Block(Graphics obj, BlockType type)
+        public Rectangle block_size;
+
+        public Block(Graphics obj, BlockType type, Rectangle size) : base(null)
         {
+            
             this.BlockObj = obj;
             this.BlockType = type;
+            this.block_size = size;
+            //if(type != )
+        }
+
+        public override void Draw(Graphics g)
+        {
+            throw new NotImplementedException();
         }
     }
 }

@@ -7,7 +7,6 @@ namespace BombSharp.Classes
     {
         public PlayerHitBox(Player player)
         {
-
             this.player = player;
             this.Points = new PointF[]
             {
@@ -19,10 +18,8 @@ namespace BombSharp.Classes
             };
         }
 
-        Player player;
+        public Player player;
 
         public override PointF[] Points {get;}
     }
 }
-
-
