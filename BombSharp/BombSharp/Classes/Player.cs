@@ -8,6 +8,16 @@ using System.Windows.Forms;
 
 namespace BombSharp.Classes
 {
+    public enum FacingDirections
+    {
+        Stop = 0,
+        Moving = 1,
+        Down = 2,
+        Right = 4,
+        Up = 8,
+        Left = 16,
+    }
+
     public class Player : Entity
     {
         public Player(PictureBox player_size) : base(null)
@@ -23,33 +33,30 @@ namespace BombSharp.Classes
 
         public PictureBox PlayerPictureBox;
 
-        public enum facingDirections
-        {
-            Down,
-            Right,
-            Up,
-            Left
-        }
+        public FacingDirections PlayerDirection { get; set; } = FacingDirections.Down | FacingDirections.Stop;
 
-        public facingDirections playerDirection = facingDirections.Down;
-
-        public void keyMovement(Keys key)
+        public void KeyMovement(Keys key)
         {
             switch (key)
             {
                 case Keys.W:
-                    this.playerDirection = facingDirections.Up;
+                    this.PlayerDirection = FacingDirections.Up | FacingDirections.Moving;
                     break;
                 case Keys.A:
-                    this.playerDirection = facingDirections.Left;
+                    this.PlayerDirection = FacingDirections.Left | FacingDirections.Moving;
                     break;
                 case Keys.S:
-                    this.playerDirection = facingDirections.Down;
+                    this.PlayerDirection = FacingDirections.Down | FacingDirections.Moving;
                     break;
                 case Keys.D:
-                    this.playerDirection = facingDirections.Right;
+                    this.PlayerDirection = FacingDirections.Right | FacingDirections.Moving;
                     break;
             }
+        }
+
+        public void Stop()
+        {
+            this.PlayerDirection = (FacingDirections)((int)this.PlayerDirection & 30); // Magic :)
         }
 
         public override void Draw(Graphics g) { }
@@ -65,28 +72,28 @@ namespace BombSharp.Classes
                         (int)info.SideA.Y - this.PlayerPictureBox.Height);
                 }
 
-                //if (info.SideA.Y < this.PlayerPictureBox.Location.Y + this.PlayerPictureBox.Height)
-                //{
-                //    this.PlayerPictureBox.Location = new Point(
-                //        this.PlayerPictureBox.Location.X,
-                //        (int)info.SideA.Y);                     
-                //}
+                if (info.SideA.Y < this.PlayerPictureBox.Location.Y + this.PlayerPictureBox.Height)
+                {
+                    this.PlayerPictureBox.Location = new Point(
+                        this.PlayerPictureBox.Location.X,
+                        (int)info.SideA.Y + 1);
+                }
             }
 
             if (info.SideA.X == info.SideB.X)
             {
-                if (info.SideA.X > this.PlayerPictureBox.Location.X + this.PlayerPictureBox.Width)
+                if (info.SideA.X > this.PlayerPictureBox.Location.X)
                 {
                     this.PlayerPictureBox.Location = new Point(
-                        (int)info.SideA.X,
+                        (int)info.SideA.X - PlayerPictureBox.Width,
                         this.PlayerPictureBox.Location.Y);
                 }
-                //if (info.SideA.X < this.PlayerPictureBox.Location.X + this.PlayerPictureBox.Width)
-                //{
-                //    this.PlayerPictureBox.Location = new Point(
-                //        (int)info.SideA.X - this.PlayerPictureBox.Width,
-                //        this.PlayerPictureBox.Location.Y);
-                //}
+                if (info.SideA.X < this.PlayerPictureBox.Location.X - this.PlayerPictureBox.Width)
+                {
+                    this.PlayerPictureBox.Location = new Point(
+                        (int)info.SideA.X + 1,
+                        this.PlayerPictureBox.Location.Y);
+                }
             }
         }
 

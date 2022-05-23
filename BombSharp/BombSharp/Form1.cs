@@ -17,7 +17,7 @@ namespace BombSharp
     {
         private Block[,] blocksLvl = new Block[11, 11];
         CollisionManager manager = new CollisionManager();
-        Bitmap bmp = null;
+        Bitmap mapbmp = null;
         Graphics g = null;
         Player player = null;
         Rectangle rec = new Rectangle();      
@@ -25,7 +25,8 @@ namespace BombSharp
         int blockHeight = Block.Height;
         int blockWidth = Block.Width;
         int y = 0;
-        
+
+        int px = 0, py = 0;
 
 
         public Form1()
@@ -55,8 +56,8 @@ namespace BombSharp
         }
         public void LoadGame(int lvl)
         {
-            bmp = new Bitmap(pictureBox1.Width, pictureBox1.Height);
-            g = Graphics.FromImage(bmp);
+            mapbmp = new Bitmap(pb.Width, pb.Height);
+            Graphics g = Graphics.FromImage(mapbmp);
             g.Clear(Color.White);
             string map = string.Empty;
             switch (lvl)
@@ -133,11 +134,11 @@ namespace BombSharp
                     currentPosX = initialPosX;
                     currentPosY += blockHeight;
                 }
-                pictureBox1.Image = bmp;
+                pb.Image = mapbmp;
                 strReader.Close();
             }
             
-            pictureBox1.Controls.Add(playerBox);
+            pb.Controls.Add(playerBox);
         }
 
         public void LoadPlayer()
@@ -150,8 +151,9 @@ namespace BombSharp
             playerBox.Location = player.PlayerPictureBox.Location;
             playerBox.BackColor = Color.Transparent;
             
-            bmp = new Bitmap(playerBox.Width, playerBox.Height);
+            Bitmap bmp = new Bitmap(pb.Width, pb.Height);
             g = Graphics.FromImage(bmp);
+            pb.Image = bmp;
             g.InterpolationMode = InterpolationMode.NearestNeighbor;
 
             var playerSS = Properties.sprites.player;
@@ -159,45 +161,43 @@ namespace BombSharp
             tm.Interval = 25;
             tm.Tick += delegate
             {
+                if (player.PlayerDirection == (FacingDirections.Down | FacingDirections.Moving))
+                {
+                    py += player.speed;
+                }
+                if (player.PlayerDirection == (FacingDirections.Right | FacingDirections.Moving))
+                {
+                    px += player.speed;
+                }
+                if (player.PlayerDirection == (FacingDirections.Up | FacingDirections.Moving))
+                {
+                    py -= player.speed;
+                }
+                if (player.PlayerDirection == (FacingDirections.Left | FacingDirections.Moving))
+                {
+                    px -= player.speed;
+                }
+
                 manager.HandleCollision();
                 g.Clear(Color.Transparent);
 
-                g.DrawImage(playerSS, new Rectangle(0, 0, playerBox.Width, playerBox.Height), new Rectangle(21 * 0, y, 17, 26), GraphicsUnit.Pixel);
+                g.DrawImage(mapbmp, 0, 0);
+                g.DrawImage(playerSS, new Rectangle(px, py, playerBox.Width, playerBox.Height), new Rectangle(21 * 0, y, 17, 26), GraphicsUnit.Pixel);
 
-                playerBox.Image = bmp;
+                pb.Refresh();
             };
             tm.Start();
         }
 
-        private void Form1_KeyDown(object sender, KeyEventArgs e)
+        private void Form1_KeyUp(object sender, KeyEventArgs e)
         {
-            player.keyMovement(e.KeyCode);
-            
-            y = 27 * (int)player.playerDirection;
-
-            moveTimerEvent(sender, e);
+            player.Stop();
         }
 
-        public void moveTimerEvent(object sender, KeyEventArgs e)
+        private void Form1_KeyDown(object sender, KeyEventArgs e)
         {
-
-            if (player.playerDirection == Player.facingDirections.Down && playerBox.Top < blockHeight*10)
-            {
-                playerBox.Top += player.speed;
-            }
-            //blocksLvl[0,0].BlockType == BlockType.Empty
-            if (player.playerDirection == Player.facingDirections.Right && playerBox.Left < blockHeight*10)
-            {
-                playerBox.Left += player.speed;
-            }
-            if (player.playerDirection == Player.facingDirections.Up && playerBox.Top > 0)
-            {
-                playerBox.Top -= player.speed;
-            }
-            if (player.playerDirection == Player.facingDirections.Left && playerBox.Left > 0)
-            {
-                playerBox.Left -= player.speed;
-            }
+            player.KeyMovement(e.KeyCode);
+            y = 27 * (int)player.PlayerDirection;
         }
     }
 }
