@@ -12,13 +12,15 @@ namespace BombSharp.Classes
 
         private Player player;
 
+        //Hitbox width = 26px
+        //hitbox height = 5px
         public override PointF[] Points => new PointF[]
         {
-            new PointF(player.PlayerPictureBox.Location.X, player.PlayerPictureBox.Location.Y),
-            new PointF(player.PlayerPictureBox.Right, player.PlayerPictureBox.Location.Y),
-            new PointF(player.PlayerPictureBox.Right, player.PlayerPictureBox.Bottom),
-            new PointF(player.PlayerPictureBox.Location.X, player.PlayerPictureBox.Bottom),
-            new PointF(player.PlayerPictureBox.Location.X, player.PlayerPictureBox.Location.Y)
+            new PointF(player.CoordX, player.CoordY),
+            new PointF(player.CoordX + player.Width, player.CoordY),
+            new PointF(player.CoordX + player.Width, player.CoordY + player.Height),
+            new PointF(player.CoordX, player.CoordY + player.Height),
+            new PointF(player.CoordX, player.CoordY)
         };
     }
 }

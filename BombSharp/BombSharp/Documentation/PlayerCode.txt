@@ -9,3 +9,5 @@ Sprite Walk, Lift and Stun
 	- Height: 26px
 
 Margin Between: 1px
+
+HitBox height: ~5px

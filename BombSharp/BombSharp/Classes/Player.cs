@@ -20,19 +20,23 @@ namespace BombSharp.Classes
 
     public class Player : Entity
     {
-        public Player(PictureBox player_size) : base(null)
+        public Player(int Width, int Height) : base(null)
         {
-            this.PlayerPictureBox = player_size;
+            this.Width = Width;
+            this.Height = Height;
+            //this.PlayerPictureBox = player_size;
             this.HitBox = HitBox.FromPlayer(this);
+            playerSS = Properties.sprites.player;
         }
 
         public int speed = 4;
+        public int CoordX, CoordY, Width, Height;
+        //public Image spritesheet = Properties.sprites.player;
+        //public Image[,] sprite_sliced = new Image[10, 7];
+        private Image playerSS = null;
+        int y = 0;
 
-        public Image spritesheet = Properties.sprites.player;
-        public Image[,] sprite_sliced = new Image[10, 7];
-
-        public PictureBox PlayerPictureBox;
-
+        //public PictureBox PlayerPictureBox;
         public FacingDirections PlayerDirection { get; set; } = FacingDirections.Down | FacingDirections.Stop;
 
         public void KeyMovement(Keys key)
@@ -59,40 +63,52 @@ namespace BombSharp.Classes
             this.PlayerDirection = (FacingDirections)((int)this.PlayerDirection & 30); // Magic :)
         }
 
-        public override void Draw(Graphics g) { }
+        public override void Draw(Graphics g)
+        {
+            g.DrawImage(playerSS, new Rectangle(this.CoordX, this.CoordY, this.Width, this.Height), new Rectangle(21 * 0, y, 17, 26), GraphicsUnit.Pixel);
+            HitBox.Draw(g);
+        }
 
         public override void OnCollision(CollisionInfo info)
         {
             if (info.SideA.Y == info.SideB.Y)
             {
-                if (info.SideA.Y > this.PlayerPictureBox.Location.Y)
-                {
-                    this.PlayerPictureBox.Location = new Point(
-                        this.PlayerPictureBox.Location.X,
-                        (int)info.SideA.Y - this.PlayerPictureBox.Height);
-                }
+                float udy = info.SideA.Y - this.CoordY;
+                float ddy = info.SideA.Y - (this.CoordY + this.Height);
+                if (udy < 0)
+                    udy = -udy;
+                if (ddy < 0)
+                    ddy = -ddy;
 
-                if (info.SideA.Y < this.PlayerPictureBox.Location.Y + this.PlayerPictureBox.Height)
+                if (udy > ddy)
                 {
-                    this.PlayerPictureBox.Location = new Point(
-                        this.PlayerPictureBox.Location.X,
-                        (int)info.SideA.Y + 1);
+                    this.CoordY = (int)info.SideA.Y - this.Height;
+                    //this.PlayerPictureBox.Location = new Point(
+                    //    this.PlayerPictureBox.Location.X,
+                    //    (int)info.SideA.Y - this.PlayerPictureBox.Height);
+                }
+                if(ddy > udy)
+                {
+                    this.CoordY = (int)info.SideA.Y;
                 }
             }
 
             if (info.SideA.X == info.SideB.X)
             {
-                if (info.SideA.X > this.PlayerPictureBox.Location.X)
+                float ldx = info.SideA.X - this.CoordX;
+                float rdx = info.SideA.X - (this.CoordX + this.Width);
+                if (ldx < 0)
+                    ldx = -ldx;
+                if (rdx < 0)
+                    rdx = -rdx;
+
+                if (ldx > rdx)
                 {
-                    this.PlayerPictureBox.Location = new Point(
-                        (int)info.SideA.X - PlayerPictureBox.Width,
-                        this.PlayerPictureBox.Location.Y);
+                    this.CoordX = (int)info.SideA.X - this.Width;
                 }
-                if (info.SideA.X < this.PlayerPictureBox.Location.X - this.PlayerPictureBox.Width)
+                if(rdx > ldx)
                 {
-                    this.PlayerPictureBox.Location = new Point(
-                        (int)info.SideA.X + 1,
-                        this.PlayerPictureBox.Location.Y);
+                    this.CoordX = (int)info.SideA.X;
                 }
             }
         }

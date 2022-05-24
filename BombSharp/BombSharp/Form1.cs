@@ -24,9 +24,8 @@ namespace BombSharp
         Timer tm = new Timer();
         int blockHeight = Block.Height;
         int blockWidth = Block.Width;
-        int y = 0;
 
-        int px = 0, py = 0;
+        //int px = 0, py = 0;
 
 
         public Form1()
@@ -110,7 +109,7 @@ namespace BombSharp
                                 g.DrawImage(blockDestructible, rec, 0, 0, 16, 16, GraphicsUnit.Pixel, attributes);
                                 blocktype = BlockType.Destructible;
                                 break;
-                            //Black Space
+                            //Blank Space
                             case "B":
                                 g.DrawImage(blockEmpty, rec, 0, 0, 16, 16, GraphicsUnit.Pixel, attributes);
                                 blocktype = BlockType.Empty;
@@ -137,52 +136,48 @@ namespace BombSharp
                 pb.Image = mapbmp;
                 strReader.Close();
             }
-            
-            pb.Controls.Add(playerBox);
         }
 
         public void LoadPlayer()
         {
-            player = new Player(playerBox);
+            player = new Player(blockWidth -20, blockHeight -12);
 
             manager.PlayerList.Add(player);
 
-            playerBox.Size = player.PlayerPictureBox.Size;
-            playerBox.Location = player.PlayerPictureBox.Location;
-            playerBox.BackColor = Color.Transparent;
+            //playerBox.Size = player.PlayerPictureBox.Size;
+            //playerBox.Location = player.PlayerPictureBox.Location;
+            //playerBox.BackColor = Color.Transparent;
             
             Bitmap bmp = new Bitmap(pb.Width, pb.Height);
             g = Graphics.FromImage(bmp);
             pb.Image = bmp;
             g.InterpolationMode = InterpolationMode.NearestNeighbor;
 
-            var playerSS = Properties.sprites.player;
-
             tm.Interval = 25;
             tm.Tick += delegate
             {
                 if (player.PlayerDirection == (FacingDirections.Down | FacingDirections.Moving))
                 {
-                    py += player.speed;
+                    player.CoordY += player.speed;
                 }
                 if (player.PlayerDirection == (FacingDirections.Right | FacingDirections.Moving))
                 {
-                    px += player.speed;
+                    player.CoordX += player.speed;
                 }
                 if (player.PlayerDirection == (FacingDirections.Up | FacingDirections.Moving))
                 {
-                    py -= player.speed;
+                    player.CoordY -= player.speed;
                 }
                 if (player.PlayerDirection == (FacingDirections.Left | FacingDirections.Moving))
                 {
-                    px -= player.speed;
+                    player.CoordX -= player.speed;
                 }
 
                 manager.HandleCollision();
                 g.Clear(Color.Transparent);
 
                 g.DrawImage(mapbmp, 0, 0);
-                g.DrawImage(playerSS, new Rectangle(px, py, playerBox.Width, playerBox.Height), new Rectangle(21 * 0, y, 17, 26), GraphicsUnit.Pixel);
+                player.Draw(g);
 
                 pb.Refresh();
             };
@@ -197,7 +192,7 @@ namespace BombSharp
         private void Form1_KeyDown(object sender, KeyEventArgs e)
         {
             player.KeyMovement(e.KeyCode);
-            y = 27 * (int)player.PlayerDirection;
+            //y = 27 * (int)player.PlayerDirection;
         }
     }
 }
