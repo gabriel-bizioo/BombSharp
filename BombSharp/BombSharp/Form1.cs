@@ -136,6 +136,10 @@ namespace BombSharp
                 pb.Image = mapbmp;
                 strReader.Close();
             }
+            foreach(Block block in manager.Entities)
+            {
+                block.HitBox.Draw(g);
+            }
         }
 
         public void LoadPlayer()

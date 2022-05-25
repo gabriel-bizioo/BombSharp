@@ -79,15 +79,45 @@ namespace BombSharp.Classes
                     udy = -udy;
                 if (ddy < 0)
                     ddy = -ddy;
-
-                if (udy > ddy)
+                float ldx = info.SideA.X - this.CoordX;
+                float rdx = info.SideA.X - (this.CoordX + this.Width);
+                if (ldx < 0)
+                    ldx = -ldx;
+                if (rdx < 0)
+                    rdx = -rdx;
+                if (udy == 0)
+                {
+                    if(ldx >= rdx)
+                    {
+                        if (info.SideB.X > info.SideA.X)
+                        {
+                            this.CoordX = (int)info.SideA.X - this.Width;
+                        }
+                        else
+                        {
+                            this.CoordX = (int)info.SideB.X - this.Width;
+                        }
+                    }
+                    else
+                    {
+                        if (info.SideA.X > info.SideB.X)
+                        {
+                            this.CoordX = (int)info.SideB.X - this.Width;
+                        }
+                        else
+                        {
+                            this.CoordX = (int)info.SideA.X - this.Width;
+                        }
+                    }
+                    
+                }
+                                //  *              
+                if (udy > ddy) //  ---
                 {
                     this.CoordY = (int)info.SideA.Y - this.Height;
-                    //this.PlayerPictureBox.Location = new Point(
-                    //    this.PlayerPictureBox.Location.X,
-                    //    (int)info.SideA.Y - this.PlayerPictureBox.Height);
                 }
-                if(ddy > udy)
+                                //  ---                
+                if (ddy > udy) //    * 
                 {
                     this.CoordY = (int)info.SideA.Y;
                 }
@@ -102,11 +132,11 @@ namespace BombSharp.Classes
                 if (rdx < 0)
                     rdx = -rdx;
 
-                if (ldx > rdx)
+                if (ldx >= rdx) // *|
                 {
                     this.CoordX = (int)info.SideA.X - this.Width;
                 }
-                if(rdx > ldx)
+                if(rdx >= ldx) // |*
                 {
                     this.CoordX = (int)info.SideA.X;
                 }
