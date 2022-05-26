@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Drawing;
+using System.Collections.Generic;
 
 namespace BombSharp.Classes
 {
@@ -13,8 +14,9 @@ namespace BombSharp.Classes
         public static BlockHitBox FromBlock(Block block)
             => new BlockHitBox(block);
 
-        public virtual CollisionInfo IsColliding(HitBox hitBox)
+        public virtual List<CollisionInfo> IsColliding(HitBox hitBox)
         {
+            List<CollisionInfo> infos = new List<CollisionInfo>();
             CollisionInfo info = new CollisionInfo();
             info.IsColliding = false;
 
@@ -24,11 +26,11 @@ namespace BombSharp.Classes
                 {
                     info.IsColliding = true;
                     (info.SideA, info.SideB) = bestside(this.Points, p);
-                    return info;
+                    infos.Add(info);
                 }
             }
 
-            return info;
+            return infos;
         }
 
         private bool linecollision(PointF p1, PointF q1, PointF p2, PointF q2)

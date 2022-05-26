@@ -23,9 +23,10 @@ namespace BombSharp.Classes
             //var info = HitBox.IsColliding(entity.HitBox);
             //if (info.IsColliding)
             //    OnCollision(info);
-            var info = entity.HitBox.IsColliding(HitBox);
-            if (info.IsColliding)
-                OnCollision(info);
+            List<CollisionInfo> infos = entity.HitBox.IsColliding(HitBox);
+            foreach(CollisionInfo info in infos)
+                if (info.IsColliding)
+                    OnCollision(info);
         }
 
         public virtual void OnCollision(CollisionInfo info) { }

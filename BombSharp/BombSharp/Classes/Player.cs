@@ -24,17 +24,18 @@ namespace BombSharp.Classes
         {
             this.Width = Width;
             this.Height = Height;
-            //this.PlayerPictureBox = player_size;
+            this.CoordX = Block.Width;
+            this.CoordY = Block.Height;
             this.HitBox = HitBox.FromPlayer(this);
             playerSS = Properties.sprites.player;
         }
 
-        public int speed = 4;
+        public int speed = 6;
         public int CoordX, CoordY, Width, Height;
+        public int SpriteY, SpriteX;
         //public Image spritesheet = Properties.sprites.player;
         //public Image[,] sprite_sliced = new Image[10, 7];
         private Image playerSS = null;
-        int y = 0;
 
         //public PictureBox PlayerPictureBox;
         public FacingDirections PlayerDirection { get; set; } = FacingDirections.Down | FacingDirections.Stop;
@@ -65,82 +66,63 @@ namespace BombSharp.Classes
 
         public override void Draw(Graphics g)
         {
-            g.DrawImage(playerSS, new Rectangle(this.CoordX, this.CoordY, this.Width, this.Height), new Rectangle(21 * 0, y, 17, 26), GraphicsUnit.Pixel);
+            g.DrawImage(playerSS, new Rectangle(this.CoordX, this.CoordY, this.Width, this.Height), new Rectangle(SpriteX, SpriteY, 17, 26), GraphicsUnit.Pixel);
             HitBox.Draw(g);
         }
 
         public override void OnCollision(CollisionInfo info)
         {
-            if (info.SideA.Y == info.SideB.Y)
-            {
-                float udy = info.SideA.Y - this.CoordY;
-                float ddy = info.SideA.Y - (this.CoordY + this.Height);
-                if (udy < 0)
-                    udy = -udy;
-                if (ddy < 0)
-                    ddy = -ddy;
-                float ldx = info.SideA.X - this.CoordX;
-                float rdx = info.SideA.X - (this.CoordX + this.Width);
-                if (ldx < 0)
-                    ldx = -ldx;
-                if (rdx < 0)
-                    rdx = -rdx;
-                if (udy == 0)
+            float ldx = info.SideA.X - this.CoordX;
+            float rdx = info.SideA.X - (this.CoordX + this.Width);
+            if (ldx < 0)
+                ldx = -ldx;
+            if (rdx < 0)
+                rdx = -rdx;
+            float udy = info.SideA.Y - this.CoordY;
+            float ddy = info.SideA.Y - (this.CoordY + this.Height);
+            if (udy < 0)
+                udy = -udy;
+            if (ddy < 0)
+                ddy = -ddy;
+
+                if (info.SideA.Y == info.SideB.Y)
                 {
-                    if(ldx >= rdx)
-                    {
-                        if (info.SideB.X > info.SideA.X)
-                        {
-                            this.CoordX = (int)info.SideA.X - this.Width;
-                        }
-                        else
-                        {
-                            this.CoordX = (int)info.SideB.X - this.Width;
-                        }
-                    }
-                    else
-                    {
-                        if (info.SideA.X > info.SideB.X)
-                        {
-                            this.CoordX = (int)info.SideB.X - this.Width;
-                        }
-                        else
-                        {
-                            this.CoordX = (int)info.SideA.X - this.Width;
-                        }
-                    }
                     
+                    
+                    if(ddy == 0 && ldx == 156 && rdx == 86)
+                    {
+                        this.CoordX = (int)info.SideB.X - this.Width;                       
+                    }
+                    if(udy == 0 && ldx == 86 && rdx == 156)
+                    {
+                        this.CoordX = (int)info.SideB.X;
+                    }
+                                    //  *              
+                    if (udy > ddy) //  ---
+                    {
+                        this.CoordY = (int)info.SideA.Y - this.Height;
+                    }
+                                    //  ---                
+                    if (ddy > udy) //    * 
+                    {
+                        this.CoordY = (int)info.SideA.Y;
+                    }
                 }
-                                //  *              
-                if (udy > ddy) //  ---
-                {
-                    this.CoordY = (int)info.SideA.Y - this.Height;
-                }
-                                //  ---                
-                if (ddy > udy) //    * 
-                {
-                    this.CoordY = (int)info.SideA.Y;
-                }
-            }
 
-            if (info.SideA.X == info.SideB.X)
-            {
-                float ldx = info.SideA.X - this.CoordX;
-                float rdx = info.SideA.X - (this.CoordX + this.Width);
-                if (ldx < 0)
-                    ldx = -ldx;
-                if (rdx < 0)
-                    rdx = -rdx;
+                if (info.SideA.X == info.SideB.X)
+                {
+                    
 
-                if (ldx >= rdx) // *|
-                {
-                    this.CoordX = (int)info.SideA.X - this.Width;
+                    if (ldx >= rdx) // *|
+                    {
+                        this.CoordX = (int)info.SideA.X - this.Width;
+                    }
+                    if (rdx >= ldx) // |*
+                    {
+                        this.CoordX = (int)info.SideA.X;
+                    }
                 }
-                if(rdx >= ldx) // |*
-                {
-                    this.CoordX = (int)info.SideA.X;
-                }
-            }
+            
         }
 
         //public void SliceImage(int x, int y)

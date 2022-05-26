@@ -136,10 +136,10 @@ namespace BombSharp
                 pb.Image = mapbmp;
                 strReader.Close();
             }
-            foreach(Block block in manager.Entities)
-            {
-                block.HitBox.Draw(g);
-            }
+            //foreach(Block block in manager.Entities)
+            //{
+            //    block.HitBox.Draw(g);
+            //}
         }
 
         public void LoadPlayer()
@@ -147,10 +147,6 @@ namespace BombSharp
             player = new Player(blockWidth -20, blockHeight -12);
 
             manager.PlayerList.Add(player);
-
-            //playerBox.Size = player.PlayerPictureBox.Size;
-            //playerBox.Location = player.PlayerPictureBox.Location;
-            //playerBox.BackColor = Color.Transparent;
             
             Bitmap bmp = new Bitmap(pb.Width, pb.Height);
             g = Graphics.FromImage(bmp);
@@ -163,14 +159,32 @@ namespace BombSharp
                 if (player.PlayerDirection == (FacingDirections.Down | FacingDirections.Moving))
                 {
                     player.CoordY += player.speed;
+                    player.SpriteY = 0;
+                    if (player.SpriteX < 105)
+                        player.SpriteX += 21;
+                    else
+                        player.SpriteX = 0;
+                    
+
                 }
                 if (player.PlayerDirection == (FacingDirections.Right | FacingDirections.Moving))
                 {
                     player.CoordX += player.speed;
+                    player.SpriteY = 27;
+                    if (player.SpriteX < 105)
+                        player.SpriteX += 21;
+                    else
+                        player.SpriteX = 0;
+
                 }
                 if (player.PlayerDirection == (FacingDirections.Up | FacingDirections.Moving))
                 {
                     player.CoordY -= player.speed;
+                    player.SpriteY = 54;
+                    if (player.SpriteX < 105)
+                        player.SpriteX += 21;
+                    else
+                        player.SpriteX = 0;
                 }
                 if (player.PlayerDirection == (FacingDirections.Left | FacingDirections.Moving))
                 {
@@ -191,6 +205,7 @@ namespace BombSharp
         private void Form1_KeyUp(object sender, KeyEventArgs e)
         {
             player.Stop();
+            player.SpriteX = 0;
         }
 
         private void Form1_KeyDown(object sender, KeyEventArgs e)
