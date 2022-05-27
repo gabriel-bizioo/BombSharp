@@ -29,15 +29,15 @@ namespace BombSharp.Classes
             this.HitBox = HitBox.FromPlayer(this);
             playerSS = Properties.sprites.player;
         }
-
+        //Mudar esse valor quebra a colisão.
+        //(se vc aumentar o valor, vai ter que diminuir as coordenadas da excessão, e vice-versa. Eg: Speed = 4, ldx/rdx = 156, 86. Speed = 6, ldx/rdx = 154, 84 )
         public int speed = 6;
+
         public int CoordX, CoordY, Width, Height;
         public int SpriteY, SpriteX;
-        //public Image spritesheet = Properties.sprites.player;
-        //public Image[,] sprite_sliced = new Image[10, 7];
+
         private Image playerSS = null;
 
-        //public PictureBox PlayerPictureBox;
         public FacingDirections PlayerDirection { get; set; } = FacingDirections.Down | FacingDirections.Stop;
 
         public void KeyMovement(Keys key)
@@ -89,11 +89,11 @@ namespace BombSharp.Classes
                 {
                     
                     
-                    if(ddy == 0 && ldx == 156 && rdx == 86)
+                    if(ddy == 0 && ldx == 154 && rdx == 84)
                     {
                         this.CoordX = (int)info.SideB.X - this.Width;                       
                     }
-                    if(udy == 0 && ldx == 86 && rdx == 156)
+                    if(udy == 0 && ldx == 84 && rdx == 154)
                     {
                         this.CoordX = (int)info.SideB.X;
                     }
@@ -124,17 +124,6 @@ namespace BombSharp.Classes
                 }
             
         }
-
-        //public void SliceImage(int x, int y)
-        //{
-        //    for (int i = 0; i < x; i++)
-        //    {
-        //        for (int j = 0; j < y; j++)
-        //        {
-        //            sprite_sliced[i, j] = (spritesheet as Bitmap).Clone(new Rectangle(i * resolucaox, j * resolucaoy, resolucaox, resolucaoy), spritesheet.PixelFormat);
-        //        }
-        //    }
-        //}
     }
 
 }
