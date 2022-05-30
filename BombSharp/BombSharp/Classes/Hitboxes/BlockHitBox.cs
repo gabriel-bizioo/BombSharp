@@ -23,7 +23,9 @@ namespace BombSharp.Classes
             };
 
         }
-                  
+        public static BlockHitBox FromBlock(Block block)
+            => new BlockHitBox(block);
+
         public Block block;
 
         public override PointF[] Points { get; }

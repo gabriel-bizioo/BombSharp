@@ -26,11 +26,9 @@ namespace BombSharp.Classes
             this.Height = Height;
             this.CoordX = Block.Width;
             this.CoordY = Block.Height;
-            this.HitBox = HitBox.FromPlayer(this);
+            this.HitBox = PlayerHitBox.FromPlayer(this);
             playerSS = Properties.sprites.player;
         }
-        //Mudar esse valor quebra a colisão.
-        //(se vc aumentar o valor, vai ter que diminuir as coordenadas da excessão, e vice-versa. Eg: Speed = 4, ldx/rdx = 156, 86. Speed = 6, ldx/rdx = 154, 84 )
         public int speed = 6;
 
         public int CoordX, CoordY, Width, Height;
@@ -67,7 +65,7 @@ namespace BombSharp.Classes
         public override void Draw(Graphics g)
         {
             g.DrawImage(playerSS, new Rectangle(this.CoordX, this.CoordY, this.Width, this.Height), new Rectangle(SpriteX, SpriteY, 17, 26), GraphicsUnit.Pixel);
-            HitBox.Draw(g);
+            //HitBox.Draw(g);
         }
 
         public override void OnCollision(CollisionInfo info)
@@ -89,7 +87,7 @@ namespace BombSharp.Classes
                 {
                     
                     
-                    if(ddy == 0 && ldx == 154 && rdx == 84)
+                    if(ddy == 0 && ldx == 160 - speed && rdx == 90 - speed)
                     {
                         this.CoordX = (int)info.SideB.X - this.Width;                       
                     }

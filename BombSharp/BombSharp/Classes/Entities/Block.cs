@@ -28,7 +28,7 @@ namespace BombSharp.Classes
             this.BlockObj = obj;
             this.BlockType = type;
             this.block_size = size;
-            this.HitBox = HitBox.FromBlock(this);
+            this.HitBox = BlockHitBox.FromBlock(this);
         }
 
         public override void Draw(Graphics g)

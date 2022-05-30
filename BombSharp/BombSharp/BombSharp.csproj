@@ -47,14 +47,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Classes\Block.cs" />
-    <Compile Include="Classes\BlockHitBox.cs" />
+    <Compile Include="Classes\Entities\Block.cs" />
+    <Compile Include="Classes\Hitboxes\BlockHitBox.cs" />
+    <Compile Include="Classes\Entities\Bomb.cs" />
+    <Compile Include="Classes\Hitboxes\BombHitBox.cs" />
     <Compile Include="Classes\CollisionInfo.cs" />
     <Compile Include="Classes\CollisionManager.cs" />
-    <Compile Include="Classes\Entity.cs" />
-    <Compile Include="Classes\HitBox.cs" />
-    <Compile Include="Classes\Player.cs" />
-    <Compile Include="Classes\PlayerHitBox.cs" />
+    <Compile Include="Classes\Entities\Entity.cs" />
+    <Compile Include="Classes\Hitboxes\HitBox.cs" />
+    <Compile Include="Classes\Entities\Player.cs" />
+    <Compile Include="Classes\Hitboxes\PlayerHitBox.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -143,6 +145,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Assets\Audio\" />
+    <Folder Include="Resources\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

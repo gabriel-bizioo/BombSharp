@@ -20,6 +20,7 @@ namespace BombSharp
         Bitmap mapbmp = null;
         Graphics g = null;
         Player player = null;
+        Bomb bomb = null;
         Rectangle rec = new Rectangle();      
         Timer tm = new Timer();
         int blockHeight = Block.Height;
@@ -145,6 +146,7 @@ namespace BombSharp
         public void LoadPlayer()
         {
             player = new Player(blockWidth -20, blockHeight -12);
+            bomb = new Bomb();
 
             manager.PlayerList.Add(player);
             
@@ -196,6 +198,9 @@ namespace BombSharp
 
                 g.DrawImage(mapbmp, 0, 0);
                 player.Draw(g);
+                bomb.Draw(g);
+                if(DateTime.Now.Second == bomb.DeployTime.AddSeconds(8).Second)
+                    bomb.Explode();
 
                 pb.Refresh();
             };
@@ -210,8 +215,11 @@ namespace BombSharp
 
         private void Form1_KeyDown(object sender, KeyEventArgs e)
         {
+            if(e.KeyCode == Keys.E)
+            {
+                bomb.Deploy(player);
+            }
             player.KeyMovement(e.KeyCode);
-            //y = 27 * (int)player.PlayerDirection;
         }
     }
 }

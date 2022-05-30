@@ -12,6 +12,9 @@ namespace BombSharp.Classes
 
         private Player player;
 
+        public static PlayerHitBox FromPlayer(Player player)
+            => new PlayerHitBox(player);
+
         //Hitbox width = 26px
         //hitbox height = 5px
         public override PointF[] Points => new PointF[]
