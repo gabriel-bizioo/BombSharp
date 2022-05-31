@@ -39,21 +39,6 @@ namespace BombSharp
             };
         }
 
-        public Block SearchElementInArrays(Graphics element)
-        {
-            Block result = null;
-            for(int i = 0; i < blocksLvl.GetLength(0); i++)
-            {
-                for(int j = 0; j < blocksLvl.GetLength(i); j++)
-                {
-                    if (element == blocksLvl[i, j].BlockObj)
-                    {
-                        result = blocksLvl[i, j];
-                    }
-                }
-            }
-            return result;
-        }
         public void LoadGame(int lvl)
         {
             mapbmp = new Bitmap(pb.Width, pb.Height);
@@ -154,7 +139,7 @@ namespace BombSharp
             g = Graphics.FromImage(bmp);
             pb.Image = bmp;
             g.InterpolationMode = InterpolationMode.NearestNeighbor;
-
+            manager.BombList.Add(bomb);
             tm.Interval = 25;
             tm.Tick += delegate
             {
@@ -166,8 +151,6 @@ namespace BombSharp
                         player.SpriteX += 21;
                     else
                         player.SpriteX = 0;
-                    
-
                 }
                 if (player.PlayerDirection == (FacingDirections.Right | FacingDirections.Moving))
                 {
@@ -177,7 +160,6 @@ namespace BombSharp
                         player.SpriteX += 21;
                     else
                         player.SpriteX = 0;
-
                 }
                 if (player.PlayerDirection == (FacingDirections.Up | FacingDirections.Moving))
                 {
@@ -199,7 +181,7 @@ namespace BombSharp
                 g.DrawImage(mapbmp, 0, 0);
                 player.Draw(g);
                 bomb.Draw(g);
-                if(DateTime.Now.Second == bomb.DeployTime.AddSeconds(8).Second)
+                if(DateTime.Now.Second == bomb.DeployTime.AddSeconds(4).Second)
                     bomb.Explode();
 
                 pb.Refresh();

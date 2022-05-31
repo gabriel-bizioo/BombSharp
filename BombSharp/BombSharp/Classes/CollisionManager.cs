@@ -9,6 +9,7 @@ namespace BombSharp.Classes
     public class CollisionManager
     {
         public List<Player> PlayerList = new List<Player>();
+        public List<Bomb> BombList = new List<Bomb>(); 
         public List<Entity> Entities { get; set; } = new List<Entity>();
 
         public void HandleCollision()
@@ -18,6 +19,14 @@ namespace BombSharp.Classes
                 foreach (var player in PlayerList)
                 {
                     player.CheckCollision(entity);
+                }
+            }
+            
+            foreach(var entity in Entities)
+            {
+                foreach(var bomb in BombList)
+                {
+                    bomb.CheckCollision(entity);
                 }
             }
         }
