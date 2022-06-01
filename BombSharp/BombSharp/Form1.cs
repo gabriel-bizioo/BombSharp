@@ -62,14 +62,12 @@ namespace BombSharp
                 //Generate Map with the txt
                 g.InterpolationMode = InterpolationMode.NearestNeighbor;
                 ImageAttributes attributes = new ImageAttributes();
-                attributes.SetWrapMode(WrapMode.TileFlipY);
                 
                 int currentPosY = 0;
                 int currentPosX = 0;
                 int initialPosX = 0;
                 int iRow = 0;
                 int iCol = 0;
-
                 rec.Size = new Size(blockWidth, blockHeight);
 
                 string strLine = string.Empty;
@@ -88,24 +86,20 @@ namespace BombSharp
                             //Destructible
                             case "D":
                                 blocktype = BlockType.Destructible;
-                                block = new Block(blocktype, rec);
-                                block.Draw(g);
                                 break;
-                            //Blank Space
+                            //Blank space
                             case "B":
                                 blocktype = BlockType.Empty;
-                                block = new Block(blocktype, rec);
-                                block.Draw(g);
                                 break;
                             //Indestructible
                             case "C":
                                 blocktype = BlockType.NonDestructible;
-                                block = new Block(blocktype, rec);
-                                block.Draw(g);
                                 break;
                             default:
                                 throw new Exception("Invalid character.");
                         }
+                        block = new Block(blocktype, rec);
+                        block.Draw(g);
                         if (blocktype.Value != BlockType.Empty) 
                             Manager.Entities.Add(block);
                         iCol++;
@@ -123,11 +117,6 @@ namespace BombSharp
             //{
             //    block.HitBox.Draw(g);
             //}
-            foreach(Block block in Manager.Entities)
-            {
-                if(block.BlockType == BlockType.Empty)
-                    Manager.Entities.Remove(block);
-            }
         }
 
         public void LoadPlayer()
@@ -179,7 +168,6 @@ namespace BombSharp
 
                 Manager.HandleCollision();
                 g.Clear(Color.Transparent);
-
                 g.DrawImage(mapbmp, 0, 0);
                 player.Draw(g);
                 bomb.Draw(g);

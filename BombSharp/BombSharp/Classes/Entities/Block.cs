@@ -46,7 +46,6 @@ namespace BombSharp.Classes
         public static int Height { get; set; } = 1000 / 11;
         public static int Width { get; set; } = 1000 / 11;
 
-        //public Graphics BlockObj { get; set; }
         public BlockType BlockType { get; set; }
         public Rectangle block_size;
 
