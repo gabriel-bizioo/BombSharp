@@ -15,8 +15,7 @@ namespace BombSharp
 {
     public partial class Form1 : Form
     {
-        private Block[,] blocksLvl = new Block[11, 11];
-        CollisionManager manager = new CollisionManager();
+        CollisionManager Manager = new CollisionManager();
         Bitmap mapbmp = null;
         Graphics g = null;
         Player player = null;
@@ -73,44 +72,42 @@ namespace BombSharp
 
                 rec.Size = new Size(blockWidth, blockHeight);
 
-                //Blocks used
-                var blockDestructible = Properties.blocks.Destructible;
-                var blockEmpty = Properties.blocks.Empty;
-                var blockNonDestructible = Properties.blocks.NonDestructible;
-
                 string strLine = string.Empty;
                 while ((strLine = strReader.ReadLine()) != null)
                 {
                     string[] strLineArray = strLine.Split(' ');
                     foreach(string strBlockChar in strLineArray)
                     {
-                        Nullable<BlockType> blocktype = null;
+                        BlockType? blocktype = null;
                         
                         rec.Location = new Point(currentPosX, currentPosY);
+                        Block block = null;
 
                         switch (strBlockChar)
                         {
                             //Destructible
                             case "D":
-                                g.DrawImage(blockDestructible, rec, 0, 0, 16, 16, GraphicsUnit.Pixel, attributes);
                                 blocktype = BlockType.Destructible;
+                                block = new Block(blocktype, rec);
+                                block.Draw(g);
                                 break;
                             //Blank Space
                             case "B":
-                                g.DrawImage(blockEmpty, rec, 0, 0, 16, 16, GraphicsUnit.Pixel, attributes);
                                 blocktype = BlockType.Empty;
+                                block = new Block(blocktype, rec);
+                                block.Draw(g);
                                 break;
                             //Indestructible
                             case "C":
-                                g.DrawImage(blockNonDestructible, rec, 0, 0, 16, 16, GraphicsUnit.Pixel, attributes);
                                 blocktype = BlockType.NonDestructible;
+                                block = new Block(blocktype, rec);
+                                block.Draw(g);
                                 break;
                             default:
                                 throw new Exception("Invalid character.");
                         }
                         if (blocktype.Value != BlockType.Empty) 
-                            manager.Entities.Add(new Block(g, blocktype.Value, rec));
-                        this.blocksLvl[iRow, iCol] = new Block(g, blocktype.Value, rec);
+                            Manager.Entities.Add(block);
                         iCol++;
                         currentPosX += blockWidth;
                     }
@@ -126,20 +123,25 @@ namespace BombSharp
             //{
             //    block.HitBox.Draw(g);
             //}
+            foreach(Block block in Manager.Entities)
+            {
+                if(block.BlockType == BlockType.Empty)
+                    Manager.Entities.Remove(block);
+            }
         }
 
         public void LoadPlayer()
         {
-            player = new Player(blockWidth -20, blockHeight -12);
+            player = new Player();
             bomb = new Bomb();
 
-            manager.PlayerList.Add(player);
+            Manager.PlayerList.Add(player);
             
             Bitmap bmp = new Bitmap(pb.Width, pb.Height);
             g = Graphics.FromImage(bmp);
             pb.Image = bmp;
             g.InterpolationMode = InterpolationMode.NearestNeighbor;
-            manager.BombList.Add(bomb);
+            Manager.BombList.Add(bomb);
             tm.Interval = 25;
             tm.Tick += delegate
             {
@@ -175,7 +177,7 @@ namespace BombSharp
                     player.CoordX -= player.speed;
                 }
 
-                manager.HandleCollision();
+                Manager.HandleCollision();
                 g.Clear(Color.Transparent);
 
                 g.DrawImage(mapbmp, 0, 0);

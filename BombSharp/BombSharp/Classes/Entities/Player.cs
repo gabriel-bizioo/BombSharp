@@ -20,10 +20,10 @@ namespace BombSharp.Classes
 
     public class Player : Entity
     {
-        public Player(int Width, int Height) : base(null)
+        public Player() : base(null)
         {
-            this.Width = Width;
-            this.Height = Height;
+            this.Width = Block.Width -20;
+            this.Height = Block.Height - 12;
             this.CoordX = Block.Width;
             this.CoordY = Block.Height;
             this.HitBox = PlayerHitBox.FromPlayer(this);

@@ -20,13 +20,9 @@ namespace BombSharp.Classes
                 {
                     player.CheckCollision(entity);
                 }
-            }
-            
-            foreach(var entity in Entities)
-            {
                 foreach(var bomb in BombList)
                 {
-                    bomb.CheckCollision(entity);
+                    entity.CheckCollision(bomb);
                 }
             }
         }

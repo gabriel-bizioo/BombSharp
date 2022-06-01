@@ -19,7 +19,7 @@ namespace BombSharp.Classes
 
         private Image BombSS = null;
 
-        public float CoordX, CoordY;
+        public int CoordX, CoordY;
         public int Width, Height;
         private bool Deployed;
         private bool Colliding;
@@ -28,7 +28,7 @@ namespace BombSharp.Classes
         public override void Draw(Graphics g)
         {
             if(Deployed)
-                g.DrawImage(BombSS, new RectangleF(CoordX, CoordY, this.Width, this.Height), new Rectangle(0, 0, 14, 14), GraphicsUnit.Pixel);
+                g.DrawImage(BombSS, new Rectangle(CoordX, CoordY, this.Width, this.Height), new Rectangle(0, 0, 14, 14), GraphicsUnit.Pixel);
             HitBox.Draw(g);
         }
 
@@ -68,10 +68,10 @@ namespace BombSharp.Classes
 
         public void Explode()
         {
-                this.CoordX -= 2.5f;
-                this.CoordY -= 2.5f;
-                this.Width += 5;
-                this.Height += 5;
+                this.CoordX -= 3;
+                this.CoordY -= 3;
+                this.Width += 6;
+                this.Height += 6;
                 Deployed = false;          
         }
 
