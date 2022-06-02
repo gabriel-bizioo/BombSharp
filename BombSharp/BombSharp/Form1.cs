@@ -113,10 +113,10 @@ namespace BombSharp
                 pb.Image = mapbmp;
                 strReader.Close();
             }
-            //foreach(Block block in manager.Entities)
-            //{
-            //    block.HitBox.Draw(g);
-            //}
+            foreach (Block block in Manager.Entities)
+            {
+                block.HitBox.Draw(g);
+            }
         }
 
         public void LoadPlayer()
@@ -177,7 +177,11 @@ namespace BombSharp
                 player.Draw(g);
                 bomb.Draw(g);
                 if(DateTime.Now.Second == bomb.DeployTime.AddSeconds(4).Second)
+                {
                     bomb.Explode();
+                    Block.ReDraw(g, Manager.Entities);
+                }
+                    
 
                 pb.Refresh();
             };
@@ -187,7 +191,6 @@ namespace BombSharp
         private void Form1_KeyUp(object sender, KeyEventArgs e)
         {
             player.Stop();
-            player.SpriteX = 0;
         }
 
         private void Form1_KeyDown(object sender, KeyEventArgs e)

@@ -54,8 +54,21 @@ namespace BombSharp.Classes
         public override void Draw(Graphics g)
         {
             g.DrawImage(BlockSS, this.block_size, 0, 0, 16, 16, GraphicsUnit.Pixel, attributes);
+            //HitBox.Draw(g);
         }
 
+        public static void ReDraw(Graphics g, List<Entity> entities)
+        {
+            Block emptyblock = null;
+
+            foreach(Block entity in entities)
+            {
+                entity.Draw(g);
+                if (entity.BlockType == BlockType.Empty)
+                    emptyblock = entity;
+            }
+            entities.Remove(emptyblock);
+        }
         public override void OnCollision(CollisionInfo info)
         {
             if (this.BlockType == BlockType.Destructible)
@@ -64,7 +77,6 @@ namespace BombSharp.Classes
                 this.BlockSS = Properties.blocks.Empty;
                 Console.WriteLine("Colidiu");
             }
-                
         }
     }
 }

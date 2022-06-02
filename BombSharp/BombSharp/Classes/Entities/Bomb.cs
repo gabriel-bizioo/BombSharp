@@ -21,20 +21,18 @@ namespace BombSharp.Classes
 
         public int CoordX, CoordY;
         public int Width, Height;
-        private bool Deployed;
-        private bool Colliding;
+        public bool Deployed { get; set; }
         public DateTime DeployTime { get; set; }
 
         public override void Draw(Graphics g)
         {
-            if(Deployed)
+            if(Deployed)    
                 g.DrawImage(BombSS, new Rectangle(CoordX, CoordY, this.Width, this.Height), new Rectangle(0, 0, 14, 14), GraphicsUnit.Pixel);
             HitBox.Draw(g);
         }
 
         public void Deploy(Player player)
         {
-            
 
             if (!Deployed)
             {
@@ -60,24 +58,18 @@ namespace BombSharp.Classes
                         this.CoordY = player.CoordY + player.Height;
                         break;
                 }
-                if(!Colliding)
-                    Deployed = true;
-                    DeployTime = DateTime.Now;   
+                Deployed = true;
+                DeployTime = DateTime.Now;
             } 
         }
 
         public void Explode()
         {
-                this.CoordX -= 3;
-                this.CoordY -= 3;
-                this.Width += 6;
-                this.Height += 6;
-                Deployed = false;          
-        }
-
-        public override void OnCollision(CollisionInfo info)
-        {
-            
+            this.CoordX -= 3;
+            this.CoordY -= 3;
+            this.Width += 6;
+            this.Height += 6;
+            Deployed = false;      
         }
     }
 }

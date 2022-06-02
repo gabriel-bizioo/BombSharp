@@ -60,6 +60,7 @@ namespace BombSharp.Classes
         public void Stop()
         {
             this.PlayerDirection = (FacingDirections)((int)this.PlayerDirection & 30); // Magic :)
+            this.SpriteX = 0;
         }
 
         public override void Draw(Graphics g)
