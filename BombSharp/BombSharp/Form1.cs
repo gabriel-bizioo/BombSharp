@@ -164,6 +164,11 @@ namespace BombSharp
                 if (player.PlayerDirection == (FacingDirections.Left | FacingDirections.Moving))
                 {
                     player.CoordX -= player.speed;
+                    player.SpriteY = 281;
+                    if (player.SpriteX < 105)
+                        player.SpriteX += 21;
+                    else
+                        player.SpriteX = 0;
                 }
 
                 Manager.HandleCollision();
