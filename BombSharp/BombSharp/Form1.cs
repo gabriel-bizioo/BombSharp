@@ -95,13 +95,19 @@ namespace BombSharp
                             case "C":
                                 blocktype = BlockType.NonDestructible;
                                 break;
+                            //Next level
+                            case "N":
+                                blocktype = BlockType.Next;
+                                break;
                             default:
                                 throw new Exception("Invalid character.");
                         }
                         block = new Block(blocktype, rec);
                         block.Draw(g);
-                        if (blocktype.Value != BlockType.Empty) 
+                        if (blocktype.Value != BlockType.Empty && blocktype.Value != BlockType.Next) 
                             Manager.Entities.Add(block);
+                        if (blocktype.Value == BlockType.Next)
+                            Manager.Next = block;
                         iCol++;
                         currentPosX += blockWidth;
                     }

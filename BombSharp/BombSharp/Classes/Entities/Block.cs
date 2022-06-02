@@ -14,7 +14,8 @@ namespace BombSharp.Classes
     {
         NonDestructible,
         Destructible,
-        Empty
+        Empty,
+        Next
     }
     public class Block : Entity
     {
@@ -36,6 +37,9 @@ namespace BombSharp.Classes
                     this.BlockSS = Properties.blocks.Destructible;
                     break;
                 case BlockType.Empty:
+                    this.BlockSS = Properties.blocks.Empty;
+                    break;
+                case BlockType.Next:
                     this.BlockSS = Properties.blocks.Empty;
                     break;
                 default:

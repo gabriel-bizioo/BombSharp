@@ -8,6 +8,7 @@ namespace BombSharp.Classes
 {
     public class CollisionManager
     {
+        public Block Next = null;
         public List<Player> PlayerList = new List<Player>();
         public List<Bomb> BombList = new List<Bomb>(); 
         public List<Entity> Entities { get; set; } = new List<Entity>();
