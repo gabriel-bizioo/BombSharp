@@ -113,10 +113,10 @@ namespace BombSharp
                 pb.Image = mapbmp;
                 strReader.Close();
             }
-            foreach (Block block in Manager.Entities)
-            {
-                block.HitBox.Draw(g);
-            }
+            //foreach (Block block in Manager.Entities)
+            //{
+            //    block.HitBox.Draw(g);
+            //}
         }
 
         public void LoadPlayer()
@@ -179,7 +179,7 @@ namespace BombSharp
                 if(DateTime.Now.Second == bomb.DeployTime.AddSeconds(4).Second)
                 {
                     bomb.Explode();
-                    Block.ReDraw(g, Manager.Entities);
+                    mapbmp = Block.ReDraw(Manager.Entities, mapbmp);
                 }
                     
 

@@ -43,8 +43,8 @@ namespace BombSharp.Classes
             }
         }
 
-        public static int Height { get; set; } = 1000 / 11;
-        public static int Width { get; set; } = 1000 / 11;
+        public static int Height { get; set; } = 1000/11;
+        public static int Width { get; set; } = 1000/11;
 
         public BlockType BlockType { get; set; }
         public Rectangle block_size;
@@ -57,8 +57,11 @@ namespace BombSharp.Classes
             //HitBox.Draw(g);
         }
 
-        public static void ReDraw(Graphics g, List<Entity> entities)
+        public static Bitmap ReDraw(List<Entity> entities, Bitmap bmp)
         {
+            Graphics g = Graphics.FromImage(bmp);
+            g.InterpolationMode = InterpolationMode.NearestNeighbor;
+
             Block emptyblock = null;
 
             foreach(Block entity in entities)
@@ -68,6 +71,8 @@ namespace BombSharp.Classes
                     emptyblock = entity;
             }
             entities.Remove(emptyblock);
+
+            return bmp;
         }
         public override void OnCollision(CollisionInfo info)
         {
