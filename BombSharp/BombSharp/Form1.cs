@@ -182,12 +182,12 @@ namespace BombSharp
                 g.DrawImage(mapbmp, 0, 0);
                 player.Draw(g);
                 bomb.Draw(g);
-                if(DateTime.Now.Second == bomb.DeployTime.AddSeconds(4).Second)
+                long dt = bomb.DeployTime.AddSeconds(4).Ticks - DateTime.Now.Ticks;
+                if (dt < 10000000 && dt > 0)
                 {
                     bomb.Explode();
                     mapbmp = Block.ReDraw(Manager.Entities, mapbmp);
-                }
-                    
+                } 
 
                 pb.Refresh();
             };
@@ -200,12 +200,12 @@ namespace BombSharp
         }
 
         private void Form1_KeyDown(object sender, KeyEventArgs e)
-        {
-            if(e.KeyCode == Keys.E)
+        {          
+            player.KeyMovement(e.KeyCode);
+            if (e.KeyCode == Keys.E)
             {
                 bomb.Deploy(player);
             }
-            player.KeyMovement(e.KeyCode);
         }
     }
 }

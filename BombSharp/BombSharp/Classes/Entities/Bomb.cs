@@ -69,7 +69,7 @@ namespace BombSharp.Classes
             this.CoordY -= 3;
             this.Width += 6;
             this.Height += 6;
-            Deployed = false;      
+            Deployed = false;
         }
     }
 }
