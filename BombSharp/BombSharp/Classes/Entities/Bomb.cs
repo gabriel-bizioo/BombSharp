@@ -63,13 +63,20 @@ namespace BombSharp.Classes
             } 
         }
 
-        public void Explode()
+        public bool Explode(DateTime now)
         {
-            this.CoordX -= 3;
-            this.CoordY -= 3;
-            this.Width += 6;
-            this.Height += 6;
-            Deployed = false;
+            long dt = this.DeployTime.AddSeconds(4).Ticks - now.Ticks;
+
+            if (dt < 10000000 && dt > 0)
+            {
+                this.CoordX -= 3;
+                this.CoordY -= 3;
+                this.Width += 6;
+                this.Height += 6;
+                Deployed = false;
+                return true;
+            } 
+            return false;
         }
     }
 }

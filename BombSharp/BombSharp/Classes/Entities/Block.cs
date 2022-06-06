@@ -84,7 +84,7 @@ namespace BombSharp.Classes
             {
                 this.BlockType = BlockType.Empty;
                 this.BlockSS = Properties.blocks.Empty;
-                Console.WriteLine("Colidiu");
+                //Console.WriteLine("Colidiu");
             }
         }
     }

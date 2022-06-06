@@ -19,14 +19,15 @@ namespace BombSharp
         Bitmap mapbmp = null;
         Graphics g = null;
         Player player = null;
+        Player player2 = null;
         Bomb bomb = null;
+        Bomb bomb2 = null;
         Rectangle rec = new Rectangle();      
         Timer tm = new Timer();
-        int blockHeight = Block.Height;
-        int blockWidth = Block.Width;
+        int BlockHeight = Block.Height;
+        int BlockWidth = Block.Width;
 
         //int px = 0, py = 0;
-
 
         public Form1()
         {
@@ -68,7 +69,7 @@ namespace BombSharp
                 int initialPosX = 0;
                 int iRow = 0;
                 int iCol = 0;
-                rec.Size = new Size(blockWidth, blockHeight);
+                rec.Size = new Size(BlockWidth, BlockHeight);
 
                 string strLine = string.Empty;
                 while ((strLine = strReader.ReadLine()) != null)
@@ -109,12 +110,12 @@ namespace BombSharp
                         if (blocktype.Value == BlockType.Next)
                             Manager.Next = block;
                         iCol++;
-                        currentPosX += blockWidth;
+                        currentPosX += BlockWidth;
                     }
                     iRow++;
                     iCol = 0;
                     currentPosX = initialPosX;
-                    currentPosY += blockHeight;
+                    currentPosY += BlockHeight;
                 }
                 pb.Image = mapbmp;
                 strReader.Close();
@@ -127,67 +128,43 @@ namespace BombSharp
 
         public void LoadPlayer()
         {
-            player = new Player();
+            player = new Player(false);
+            player2 = new Player(true);
             bomb = new Bomb();
+            bomb2 = new Bomb();
 
             Manager.PlayerList.Add(player);
+            Manager.PlayerList.Add(player2);
             
             Bitmap bmp = new Bitmap(pb.Width, pb.Height);
             g = Graphics.FromImage(bmp);
             pb.Image = bmp;
             g.InterpolationMode = InterpolationMode.NearestNeighbor;
+            
             Manager.BombList.Add(bomb);
+            Manager.BombList.Add(bomb2);
+            
             tm.Interval = 25;
             tm.Tick += delegate
             {
-                if (player.PlayerDirection == (FacingDirections.Down | FacingDirections.Moving))
-                {
-                    player.CoordY += player.speed;
-                    player.SpriteY = 0;
-                    if (player.SpriteX < 105)
-                        player.SpriteX += 21;
-                    else
-                        player.SpriteX = 0;
-                }
-                if (player.PlayerDirection == (FacingDirections.Right | FacingDirections.Moving))
-                {
-                    player.CoordX += player.speed;
-                    player.SpriteY = 27;
-                    if (player.SpriteX < 105)
-                        player.SpriteX += 21;
-                    else
-                        player.SpriteX = 0;
-                }
-                if (player.PlayerDirection == (FacingDirections.Up | FacingDirections.Moving))
-                {
-                    player.CoordY -= player.speed;
-                    player.SpriteY = 54;
-                    if (player.SpriteX < 105)
-                        player.SpriteX += 21;
-                    else
-                        player.SpriteX = 0;
-                }
-                if (player.PlayerDirection == (FacingDirections.Left | FacingDirections.Moving))
-                {
-                    player.CoordX -= player.speed;
-                    player.SpriteY = 281;
-                    if (player.SpriteX < 105)
-                        player.SpriteX += 21;
-                    else
-                        player.SpriteX = 0;
-                }
+                player.WalkAnimation();
+                player2.WalkAnimation();
 
                 Manager.HandleCollision();
+                
                 g.Clear(Color.Transparent);
                 g.DrawImage(mapbmp, 0, 0);
+
                 player.Draw(g);
+                player2.Draw(g);
+                
                 bomb.Draw(g);
-                long dt = bomb.DeployTime.AddSeconds(4).Ticks - DateTime.Now.Ticks;
-                if (dt < 10000000 && dt > 0)
+                bomb2.Draw(g);
+
+                if(bomb.Explode(DateTime.Now) | bomb2.Explode(DateTime.Now))
                 {
-                    bomb.Explode();
                     mapbmp = Block.ReDraw(Manager.Entities, mapbmp);
-                } 
+                }
 
                 pb.Refresh();
             };
@@ -197,14 +174,20 @@ namespace BombSharp
         private void Form1_KeyUp(object sender, KeyEventArgs e)
         {
             player.Stop();
+            player2.Stop();
         }
 
         private void Form1_KeyDown(object sender, KeyEventArgs e)
         {          
             player.KeyMovement(e.KeyCode);
+            player2.KeyMovement(e.KeyCode);
             if (e.KeyCode == Keys.E)
             {
                 bomb.Deploy(player);
+            }
+            if (e.KeyCode == Keys.End)
+            {
+                bomb2.Deploy(player2);
             }
         }
     }

@@ -20,41 +20,74 @@ namespace BombSharp.Classes
 
     public class Player : Entity
     {
-        public Player() : base(null)
+        public Player(bool player2) : base(null)
         {
-            this.Width = Block.Width -20;
+            this.Player2 = player2;
+            if (Player2)
+            {
+                this.CoordX = Block.Width * 9;
+                this.CoordY = Block.Height * 9;
+            }
+            else
+            {  
+                this.CoordX = Block.Width;
+                this.CoordY = Block.Height;
+            }
+            this.Width = Block.Width - 20;
             this.Height = Block.Height - 12;
-            this.CoordX = Block.Width;
-            this.CoordY = Block.Height;
             this.HitBox = PlayerHitBox.FromPlayer(this);
             playerSS = Properties.sprites.player;
         }
+        
         public int speed = 6;
 
         public int CoordX, CoordY, Width, Height;
         public int SpriteY, SpriteX;
 
         private Image playerSS = null;
+        private bool Player2;
 
         public FacingDirections PlayerDirection { get; set; } = FacingDirections.Down | FacingDirections.Stop;
 
         public void KeyMovement(Keys key)
         {
-            switch (key)
+            if (!Player2)
             {
-                case Keys.W:
-                    this.PlayerDirection = FacingDirections.Up | FacingDirections.Moving;
-                    break;
-                case Keys.A:
-                    this.PlayerDirection = FacingDirections.Left | FacingDirections.Moving;
-                    break;
-                case Keys.S:
-                    this.PlayerDirection = FacingDirections.Down | FacingDirections.Moving;
-                    break;
-                case Keys.D:
-                    this.PlayerDirection = FacingDirections.Right | FacingDirections.Moving;
-                    break;
+                switch (key)
+                {
+                    case Keys.W:
+                        this.PlayerDirection = FacingDirections.Up | FacingDirections.Moving;
+                        break;
+                    case Keys.A:
+                        this.PlayerDirection = FacingDirections.Left | FacingDirections.Moving;
+                        break;
+                    case Keys.S:
+                        this.PlayerDirection = FacingDirections.Down | FacingDirections.Moving;
+                        break;
+                    case Keys.D:
+                        this.PlayerDirection = FacingDirections.Right | FacingDirections.Moving;
+                        break;
+                }
             }
+            else
+            {
+                switch (key)
+                {
+                    case Keys.Up:
+                        this.PlayerDirection = FacingDirections.Up | FacingDirections.Moving;
+                        break;
+                    case Keys.Left:
+                        this.PlayerDirection = FacingDirections.Left | FacingDirections.Moving;
+                        break;
+                    case Keys.Down:
+                        this.PlayerDirection = FacingDirections.Down | FacingDirections.Moving;
+                        break;
+                    case Keys.Right:
+                        this.PlayerDirection = FacingDirections.Right | FacingDirections.Moving;
+                        break;
+                }
+            }
+            
         }
 
         public void Stop()
@@ -67,6 +100,56 @@ namespace BombSharp.Classes
         {
             g.DrawImage(playerSS, new Rectangle(this.CoordX, this.CoordY, this.Width, this.Height), new Rectangle(SpriteX, SpriteY, 17, 26), GraphicsUnit.Pixel);
             //HitBox.Draw(g);
+        }
+
+        public void WalkAnimation()
+        {
+            if (this.PlayerDirection == (FacingDirections.Down | FacingDirections.Moving))
+            {
+                this.CoordY += this.speed;
+                this.SpriteY = 0;
+                if (this.SpriteX < 105)
+                    this.SpriteX += 21;
+                else
+                    this.SpriteX = 0;
+            }
+            if (this.PlayerDirection == (FacingDirections.Right | FacingDirections.Moving))
+            {
+                this.CoordX += this.speed;
+                this.SpriteY = 27;
+                if (this.SpriteX < 105)
+                    this.SpriteX += 21;
+                else
+                    this.SpriteX = 0;
+            }
+            if (this.PlayerDirection == (FacingDirections.Up | FacingDirections.Moving))
+            {
+                this.CoordY -= this.speed;
+                this.SpriteY = 54;
+                if (this.SpriteX < 105)
+                    this.SpriteX += 21;
+                else
+                    this.SpriteX = 0;
+            }
+            if (this.PlayerDirection == (FacingDirections.Left | FacingDirections.Moving))
+            {
+                this.CoordX -= this.speed;
+                this.SpriteY = 281;
+                if (this.SpriteX < 105)
+                    this.SpriteX += 21;
+                else
+                    this.SpriteX = 0;
+            }
+        }
+
+        public void DeathAnimation()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Die()
+        {
+            throw new NotImplementedException();
         }
 
         public override void OnCollision(CollisionInfo info)
