@@ -37,9 +37,11 @@ namespace BombSharp.Classes
             this.Height = Block.Height - 12;
             this.HitBox = PlayerHitBox.FromPlayer(this);
             playerSS = Properties.sprites.player;
+            this.Health = 1;
         }
         
-        public int speed = 6;
+        public int Speed = 6;
+        public int Health;
 
         public int CoordX, CoordY, Width, Height;
         public int SpriteY, SpriteX;
@@ -104,87 +106,105 @@ namespace BombSharp.Classes
 
         public void WalkAnimation()
         {
-            if (this.PlayerDirection == (FacingDirections.Down | FacingDirections.Moving))
+            if(this.Health > 0)
             {
-                this.CoordY += this.speed;
-                this.SpriteY = 0;
-                if (this.SpriteX < 105)
-                    this.SpriteX += 21;
-                else
-                    this.SpriteX = 0;
+                if (this.PlayerDirection == (FacingDirections.Down | FacingDirections.Moving))
+                {
+                    this.CoordY += this.Speed;
+                    this.SpriteY = 0;
+                    if (this.SpriteX < 105)
+                        this.SpriteX += 21;
+                    else
+                        this.SpriteX = 0;
+                }
+                if (this.PlayerDirection == (FacingDirections.Right | FacingDirections.Moving))
+                {
+                    this.CoordX += this.Speed;
+                    this.SpriteY = 27;
+                    if (this.SpriteX < 105)
+                        this.SpriteX += 21;
+                    else
+                        this.SpriteX = 0;
+                }
+                if (this.PlayerDirection == (FacingDirections.Up | FacingDirections.Moving))
+                {
+                    this.CoordY -= this.Speed;
+                    this.SpriteY = 54;
+                    if (this.SpriteX < 105)
+                        this.SpriteX += 21;
+                    else
+                        this.SpriteX = 0;
+                }
+                if (this.PlayerDirection == (FacingDirections.Left | FacingDirections.Moving))
+                {
+                    this.CoordX -= this.Speed;
+                    this.SpriteY = 281;
+                    if (this.SpriteX < 105)
+                        this.SpriteX += 21;
+                    else
+                        this.SpriteX = 0;
+                }
             }
-            if (this.PlayerDirection == (FacingDirections.Right | FacingDirections.Moving))
-            {
-                this.CoordX += this.speed;
-                this.SpriteY = 27;
-                if (this.SpriteX < 105)
-                    this.SpriteX += 21;
-                else
-                    this.SpriteX = 0;
-            }
-            if (this.PlayerDirection == (FacingDirections.Up | FacingDirections.Moving))
-            {
-                this.CoordY -= this.speed;
-                this.SpriteY = 54;
-                if (this.SpriteX < 105)
-                    this.SpriteX += 21;
-                else
-                    this.SpriteX = 0;
-            }
-            if (this.PlayerDirection == (FacingDirections.Left | FacingDirections.Moving))
-            {
-                this.CoordX -= this.speed;
-                this.SpriteY = 281;
-                if (this.SpriteX < 105)
-                    this.SpriteX += 21;
-                else
-                    this.SpriteX = 0;
-            }
+            
         }
 
         public void DeathAnimation()
         {
-            throw new NotImplementedException();
+            this.SpriteY = 255;
+            if (this.SpriteX >= 111)
+                this.SpriteX = 0;
+            this.SpriteX += 26;
+
         }
 
         public void Die()
         {
-            throw new NotImplementedException();
+            if (this.Health < 0)
+            {
+                this.Speed = 0;
+                DeathAnimation();
+            }
         }
 
         public override void OnCollision(CollisionInfo info)
         {
-            float ldx = info.SideA.X - this.CoordX;
-            float rdx = info.SideA.X - (this.CoordX + this.Width);
-            if (ldx < 0)
-                ldx = -ldx;
-            if (rdx < 0)
-                rdx = -rdx;
-            float udy = info.SideA.Y - this.CoordY;
-            float ddy = info.SideA.Y - (this.CoordY + this.Height);
-            if (udy < 0)
-                udy = -udy;
-            if (ddy < 0)
-                ddy = -ddy;
+            if (info.Entity is Bomb)
+            {
+                this.Health -= 1;
+            }
+            else
+            {
+                float ldx = info.SideA.X - this.CoordX;
+                float rdx = info.SideA.X - (this.CoordX + this.Width);
+                if (ldx < 0)
+                    ldx = -ldx;
+                if (rdx < 0)
+                    rdx = -rdx;
+                float udy = info.SideA.Y - this.CoordY;
+                float ddy = info.SideA.Y - (this.CoordY + this.Height);
+                if (udy < 0)
+                    udy = -udy;
+                if (ddy < 0)
+                    ddy = -ddy;
 
                 if (info.SideA.Y == info.SideB.Y)
                 {
-                    
-                    
-                    if(ddy == 0 && ldx == 160 - speed && rdx == 90 - speed)
+
+
+                    if (ddy == 0 && ldx == 160 - Speed && rdx == 90 - Speed)
                     {
-                        this.CoordX = (int)info.SideB.X - this.Width;                       
+                        this.CoordX = (int)info.SideB.X - this.Width;
                     }
-                    if(udy == 0 && ldx == 84 && rdx == 154)
+                    if (udy == 0 && ldx == 84 && rdx == 154)
                     {
                         this.CoordX = (int)info.SideB.X;
                     }
-                                    //  *              
+                    //  *              
                     if (udy > ddy) //  ---
                     {
                         this.CoordY = (int)info.SideA.Y - this.Height;
                     }
-                                    //  ---                
+                    //  ---                
                     if (ddy > udy) //    * 
                     {
                         this.CoordY = (int)info.SideA.Y;
@@ -193,7 +213,7 @@ namespace BombSharp.Classes
 
                 if (info.SideA.X == info.SideB.X)
                 {
-                    
+
 
                     if (ldx >= rdx) // *|
                     {
@@ -204,6 +224,9 @@ namespace BombSharp.Classes
                         this.CoordX = (int)info.SideA.X;
                     }
                 }
+            }
+
+            
             
         }
     }

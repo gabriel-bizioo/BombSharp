@@ -157,6 +157,9 @@ namespace BombSharp
 
                 player.Draw(g);
                 player2.Draw(g);
+
+                player.Die();
+                player2.Die();
                 
                 bomb.Draw(g);
                 bomb2.Draw(g);
@@ -173,8 +176,11 @@ namespace BombSharp
 
         private void Form1_KeyUp(object sender, KeyEventArgs e)
         {
-            player.Stop();
-            player2.Stop();
+            if(e.KeyCode == Keys.W | e.KeyCode ==  Keys.A | e.KeyCode == Keys.S | e.KeyCode == Keys.D)
+                player.Stop();
+            
+            if(e.KeyCode == Keys.Up | e.KeyCode == Keys.Left | e.KeyCode == Keys.Down | e.KeyCode == Keys.Right)
+                player2.Stop();
         }
 
         private void Form1_KeyDown(object sender, KeyEventArgs e)

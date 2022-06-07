@@ -20,6 +20,10 @@ namespace BombSharp.Classes
                 foreach (var player in PlayerList)
                 {
                     player.CheckCollision(entity);
+                    foreach(var bomb in BombList)
+                    {
+                        player.CheckCollision(bomb);
+                    }
                 }
                 foreach(var bomb in BombList)
                 {

@@ -15,6 +15,7 @@ namespace BombSharp.Classes
             this.HitBox = BombHitBox.FromBomb(this);
             this.Width = Block.Width;
             this.Height = Block.Height;
+            this.CoordX = 1000;
         }
 
         private Image BombSS = null;
