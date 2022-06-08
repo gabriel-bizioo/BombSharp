@@ -12,7 +12,7 @@ namespace BombSharp.Classes
         public Bomb() : base(null)
         {
             BombSS = Properties.sprites.items;
-            this.HitBox = BombHitBox.FromBomb(this);
+            this.HitBox = BlockHitBox.FromBomb(this);
             this.Width = Block.Width;
             this.Height = Block.Height;
             this.CoordX = 1000;
@@ -34,7 +34,6 @@ namespace BombSharp.Classes
 
         public void Deploy(Player player)
         {
-
             if (!Deployed)
             {
                 this.Width = Block.Width - 20;
@@ -63,18 +62,22 @@ namespace BombSharp.Classes
                 DeployTime = DateTime.Now;
             } 
         }
-
+        
         public bool Explode(DateTime now)
         {
             long dt = this.DeployTime.AddSeconds(4).Ticks - now.Ticks;
+            long dt2 = this.DeployTime.AddSeconds(8).Ticks - now.Ticks;
 
             if (dt < 10000000 && dt > 0)
             {
+                this.HitBox = BombHitBox.FromBomb(this);
                 this.CoordX -= 3;
                 this.CoordY -= 3;
                 this.Width += 6;
                 this.Height += 6;
+                
                 Deployed = false;
+                this.HitBox = BlockHitBox.FromBomb(this);
                 return true;
             } 
             return false;

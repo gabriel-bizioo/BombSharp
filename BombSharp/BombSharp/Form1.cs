@@ -135,6 +135,8 @@ namespace BombSharp
 
             Manager.PlayerList.Add(player);
             Manager.PlayerList.Add(player2);
+            //Manager.Entities.Add(bomb);
+            //Manager.Entities.Add(bomb2);
             
             Bitmap bmp = new Bitmap(pb.Width, pb.Height);
             g = Graphics.FromImage(bmp);
@@ -195,6 +197,11 @@ namespace BombSharp
             {
                 bomb2.Deploy(player2);
             }
+            if (e.KeyCode == Keys.Enter)
+                player.Respawn();
+
+            if (e.KeyCode == Keys.PageDown)
+                player2.Respawn();
         }
     }
 }

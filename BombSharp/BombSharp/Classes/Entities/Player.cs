@@ -37,11 +37,11 @@ namespace BombSharp.Classes
             this.Height = Block.Height - 12;
             this.HitBox = PlayerHitBox.FromPlayer(this);
             playerSS = Properties.sprites.player;
-            this.Health = 1;
+            this.Alive = true;
         }
         
         public int Speed = 6;
-        public int Health;
+        public bool Alive;
 
         public int CoordX, CoordY, Width, Height;
         public int SpriteY, SpriteX;
@@ -50,6 +50,29 @@ namespace BombSharp.Classes
         private bool Player2;
 
         public FacingDirections PlayerDirection { get; set; } = FacingDirections.Down | FacingDirections.Stop;
+
+
+        public void Respawn()
+        {
+            if (!this.Alive)
+            {
+                if (Player2)
+                {
+                    this.CoordX = Block.Width * 9;
+                    this.CoordY = Block.Height * 9;
+                }
+                else
+                {
+                    this.CoordX = Block.Width;
+                    this.CoordY = Block.Height;
+                }
+
+                this.Speed = 6;
+                this.SpriteY = 0;
+                this.SpriteX = 0;
+                this.Alive = true;
+            }
+        }
 
         public void KeyMovement(Keys key)
         {
@@ -106,7 +129,7 @@ namespace BombSharp.Classes
 
         public void WalkAnimation()
         {
-            if(this.Health > 0)
+            if(Alive)
             {
                 if (this.PlayerDirection == (FacingDirections.Down | FacingDirections.Moving))
                 {
@@ -159,7 +182,7 @@ namespace BombSharp.Classes
 
         public void Die()
         {
-            if (this.Health < 0)
+            if (!this.Alive)
             {
                 this.Speed = 0;
                 DeathAnimation();
@@ -170,7 +193,7 @@ namespace BombSharp.Classes
         {
             if (info.Entity is Bomb)
             {
-                this.Health -= 1;
+                this.Alive = false;
             }
             else
             {
@@ -189,8 +212,6 @@ namespace BombSharp.Classes
 
                 if (info.SideA.Y == info.SideB.Y)
                 {
-
-
                     if (ddy == 0 && ldx == 160 - Speed && rdx == 90 - Speed)
                     {
                         this.CoordX = (int)info.SideB.X - this.Width;
@@ -199,12 +220,12 @@ namespace BombSharp.Classes
                     {
                         this.CoordX = (int)info.SideB.X;
                     }
-                    //  *              
+                                    //  *              
                     if (udy > ddy) //  ---
                     {
                         this.CoordY = (int)info.SideA.Y - this.Height;
                     }
-                    //  ---                
+                                    //  ---                
                     if (ddy > udy) //    * 
                     {
                         this.CoordY = (int)info.SideA.Y;
