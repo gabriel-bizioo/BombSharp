@@ -66,7 +66,6 @@ namespace BombSharp.Classes
         public bool Explode(DateTime now)
         {
             long dt = this.DeployTime.AddSeconds(4).Ticks - now.Ticks;
-            long dt2 = this.DeployTime.AddSeconds(8).Ticks - now.Ticks;
 
             if (dt < 10000000 && dt > 0)
             {
@@ -79,7 +78,7 @@ namespace BombSharp.Classes
                 Deployed = false;
                 this.HitBox = BlockHitBox.FromBomb(this);
                 return true;
-            } 
+            }
             return false;
         }
     }

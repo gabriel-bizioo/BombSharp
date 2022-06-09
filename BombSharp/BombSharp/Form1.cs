@@ -170,7 +170,6 @@ namespace BombSharp
                 {
                     mapbmp = Block.ReDraw(Manager.Entities, mapbmp);
                 }
-
                 pb.Refresh();
             };
             tm.Start();

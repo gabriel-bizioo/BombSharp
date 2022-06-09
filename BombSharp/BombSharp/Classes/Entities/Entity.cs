@@ -22,11 +22,14 @@ namespace BombSharp.Classes
         {
             List<CollisionInfo> infos = entity.HitBox.IsColliding(HitBox);
             foreach(CollisionInfo info in infos)
+            {
                 if (info.IsColliding)
                 {
                     info.Entity = entity;
                     OnCollision(info);
                 }
+            }
+                
         }
 
         public virtual void OnCollision(CollisionInfo info) { }
